@@ -23,14 +23,6 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Attack(4);
-        }
-    }
-
     public void Damage(float damageAmount)
     {
         currentHealth -= damageAmount;
@@ -45,6 +37,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void Attack(int AttackMoveSet) //move set start at 1
     {
+        Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
         if (AttackMoveSet == 3)
         {
@@ -62,5 +55,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         Destroy(gameObject);
     }
 
+    private void AttackPattern()
+    {
+        Attack(Random.Range(1, 5));
+    }
     
 }
