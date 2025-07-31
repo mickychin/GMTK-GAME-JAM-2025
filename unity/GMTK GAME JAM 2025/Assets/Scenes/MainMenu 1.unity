@@ -181,11 +181,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 39
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 57
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -237,8 +237,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 143.5893, y: 122.977264}
-  m_SizeDelta: {x: 221.1786, y: 55.9545}
+  m_AnchoredPosition: {x: 184.19574, y: 157.84291}
+  m_SizeDelta: {x: 302.3916, y: 76.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683128482
 MonoBehaviour:
@@ -283,7 +283,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 683128483}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1156116763}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &683128483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +518,7 @@ GameObject:
   - component: {fileID: 1156116762}
   - component: {fileID: 1156116761}
   - component: {fileID: 1156116760}
+  - component: {fileID: 1156116763}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -563,6 +576,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1156116763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156116759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2698e1803d77634c869b11d9f1dd5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1648626170
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,8 +728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 143.5893, y: 56}
-  m_SizeDelta: {x: 221.1786, y: 55.9545}
+  m_AnchoredPosition: {x: 184.19574, y: 66.27275}
+  m_SizeDelta: {x: 302.3916, y: 76.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1763528115
 MonoBehaviour:
@@ -749,7 +774,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1763528116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1156116763}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: CloseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1763528116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,11 +884,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 39
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 57
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
