@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float rollDistance;
     public bool IFrame;
 
+    private bool isAttacking;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,12 +75,14 @@ public class PlayerControl : MonoBehaviour
         {
             //Debug.Log("FIRE!");
             animator.SetTrigger("Attack");
+            isAttacking = true;
+            rb.velocity = new Vector2();
         }
     }
 
     private void FixedUpdate()
     {
-        if (!isRolling)
+        if (!isRolling && !isAttacking)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -131,5 +135,10 @@ public class PlayerControl : MonoBehaviour
     private void SetIFrameFalse()
     {
         IFrame = false;
+    }
+
+    private void FinishAttack()
+    {
+        isAttacking = false;
     }
 }
