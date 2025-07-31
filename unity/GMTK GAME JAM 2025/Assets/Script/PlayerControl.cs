@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     private float horizontal;
+    [Header("Movement")]
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 16f;
     private bool isFacingRight = true;
@@ -17,12 +18,17 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    [SerializeField] private Animator animator;
+    private Animator animator;
     private bool isRolling;
     [SerializeField] private float rollDistance;
     public bool IFrame;
 
     private bool isAttacking;
+    [SerializeField] private Transform attackTransform;
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private LayerMask attackableLayer;
+    [SerializeField] private float damageAmount = 1f;
+    RaycastHit2D[] hits;
 
     private void Start()
     {
@@ -75,8 +81,7 @@ public class PlayerControl : MonoBehaviour
         {
             //Debug.Log("FIRE!");
             animator.SetTrigger("Attack");
-            isAttacking = true;
-            rb.velocity = new Vector2();
+            Attack();
         }
     }
 
@@ -120,6 +125,29 @@ public class PlayerControl : MonoBehaviour
                 rb.velocity = new Vector2(rollDistance * -1, rb.velocity.y);
             }
         }
+    }
+
+    private void Attack()
+    {
+        isAttacking = true;
+        rb.velocity = new Vector2();
+        hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0f, attackableLayer);
+
+        for(int i = 0; i < hits.Length; i++)
+        {
+            IDamagable idamagable = hits[i].collider.gameObject.GetComponent<IDamagable>();
+
+            if(idamagable != null)
+            {
+                // its an enemy, the enemy take damage!
+                idamagable.Damage(damageAmount);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
 
     private void FinishRolling()
