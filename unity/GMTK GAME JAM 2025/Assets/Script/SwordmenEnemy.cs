@@ -17,6 +17,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     public void Damage(float damageAmount)
     {
         currentHealth -= damageAmount;
+        Debug.Log("DAMAGE TAKEN");
 
         if(currentHealth <= 0)
         {
