@@ -1,21 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwordmenEnemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private float maxHealth = 3f;
     Animator animator;
+    Rigidbody2D rb;
+    [SerializeField] float DashDistance;
+    [SerializeField] float JumpHeight;
+    [SerializeField] float jumpAttackDashDistance;
 
     private float currentHealth;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
 
-        Attack(1);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Attack(4);
+        }
     }
 
     public void Damage(float damageAmount)
@@ -33,9 +46,14 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     private void Attack(int AttackMoveSet) //move set start at 1
     {
         animator.SetInteger("Attack", AttackMoveSet);
-        if (AttackMoveSet == 1)
+        if (AttackMoveSet == 3)
         {
-            //overhead swing
+            //dash
+            rb.velocity = new Vector2(DashDistance, rb.velocity.y);
+        }
+        else if (AttackMoveSet == 4)
+        {
+            rb.velocity = new Vector2(jumpAttackDashDistance, JumpHeight);
         }
     }
 
@@ -43,4 +61,6 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     {
         Destroy(gameObject);
     }
+
+    
 }

@@ -284,6 +284,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   damageAmount: 1
+  DamageLayer_number: 9
+  maxHP: 3
 --- !u!95 &6503613358661509999
 Animator:
   serializedVersion: 5

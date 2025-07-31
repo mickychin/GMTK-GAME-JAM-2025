@@ -24,14 +24,20 @@ public class PlayerControl : MonoBehaviour
     public bool IFrame;
 
     private bool isAttacking;
+    [Header("Attack")]
     [SerializeField] private Transform attackTransform;
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private LayerMask attackableLayer;
     [SerializeField] private float damageAmount = 1f;
     RaycastHit2D[] hits;
 
+    [SerializeField] private int DamageLayer_number;
+    [SerializeField] private int maxHP;
+    private int currentHP;
+
     private void Start()
     {
+        currentHP = maxHP;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -142,6 +148,16 @@ public class PlayerControl : MonoBehaviour
                 // its an enemy, the enemy take damage!
                 idamagable.Damage(damageAmount);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == DamageLayer_number)
+        {
+            //TAKE DAMAGE
+            currentHP -= collision.GetComponent<DamagePlayer>().Damage;
+            Debug.Log(currentHP);
         }
     }
 
