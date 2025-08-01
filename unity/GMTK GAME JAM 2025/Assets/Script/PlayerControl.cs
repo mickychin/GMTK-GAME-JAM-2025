@@ -54,6 +54,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform ParryPos_1;
     [SerializeField] private Transform ParryPos_2;
     [SerializeField] private LayerMask AttacksLayer;
+    private bool isStanceBreak;
 
     private void Start()
     {
@@ -94,18 +95,18 @@ public class PlayerControl : MonoBehaviour
             jumpBufferCounter = 0f;
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f && !isStanceBreak && !isAttacking)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (!isRolling && !IsParrying)
+        if (!isRolling && !IsParrying && !isStanceBreak)
         {
             Flip();
             DodgeRollCheck();
         }
 
-        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && !IsParrying)
+        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && !IsParrying && !isStanceBreak)
         {
             //Debug.Log("FIRE!");
             animator.SetTrigger("Attack");
@@ -116,7 +117,7 @@ public class PlayerControl : MonoBehaviour
         Parry -= Time.deltaTime;
         CanParry += Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(1) && !isAttacking && !isRolling)
+        if (Input.GetMouseButtonDown(1) && !isAttacking && !isRolling && !isStanceBreak)
         {
             //right click
             rb.velocity = Vector2.zero;
@@ -141,7 +142,7 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isRolling && !isAttacking && !IsParrying)
+        if (!isRolling && !isAttacking && !IsParrying && !isStanceBreak)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -204,6 +205,11 @@ public class PlayerControl : MonoBehaviour
         if(collision.gameObject.layer == DamageLayer_number && IFrame <= 0 && !dodgeIFrame)
         {
             Debug.Log("HIt");
+            if (isStanceBreak)
+            {
+                Die();
+            }
+
             if (IsParryContact() && Parry > 0)
             {
                 //PARRY
@@ -218,6 +224,12 @@ public class PlayerControl : MonoBehaviour
             {
                 //block and lose stance
                 Stance -= collision.GetComponent<DamagePlayer>().Damage;
+                if (Stance <= 0f)
+                {
+                    isStanceBreak = true;
+                    animator.SetTrigger("Stance_Break");
+                    rb.velocity = Vector2.zero;
+                }
                 return;
             }
             //TAKE DAMAGE
@@ -227,9 +239,15 @@ public class PlayerControl : MonoBehaviour
 
             if(currentHP <= 0)
             {
-                FindObjectOfType<GameMaster>().Die();
+                //die
+                Die();
             }
         }
+    }
+
+    private void Die()
+    {
+        FindObjectOfType<GameMaster>().Die();
     }
 
     public bool IsParryContact()
@@ -272,5 +290,10 @@ public class PlayerControl : MonoBehaviour
     private void FinishAttack()
     {
         isAttacking = false;
+    }
+
+    private void FinishStanceBreak()
+    {
+        isStanceBreak = false;
     }
 }

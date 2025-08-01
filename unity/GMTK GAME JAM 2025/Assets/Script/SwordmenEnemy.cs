@@ -13,6 +13,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] float DashDistance;
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
+    [SerializeField] float attackDamage;
     private bool isAttacking;
 
     [Header("Player Detection")]
@@ -93,6 +94,15 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     public void GotBlocked(float BlockKB)
     {
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
+
+        Stance -= attackDamage;
+
+        if (Stance <= 0)
+        {
+            //staggered
+            animator.SetTrigger("Stance_Break");
+            isStance_Break = true;
+        }
     }
 
     private bool isBLock() //theres a chance of blocking after getting hit and not
