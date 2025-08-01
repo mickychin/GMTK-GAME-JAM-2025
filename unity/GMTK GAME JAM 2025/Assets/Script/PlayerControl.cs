@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -22,7 +23,9 @@ public class PlayerControl : MonoBehaviour
     private Animator animator;
     private bool isRolling;
     [SerializeField] private float rollDistance;
-    public bool IFrame;
+    [SerializeField] private float IFrameTime;
+    public float IFrame;
+    private bool dodgeIFrame;
 
     private bool isAttacking;
     [Header("Attack")]
@@ -45,6 +48,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        IFrame -= Time.deltaTime;
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (IsGrounded())
@@ -154,11 +158,12 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == DamageLayer_number)
+        if(collision.gameObject.layer == DamageLayer_number && IFrame <= 0 && !dodgeIFrame)
         {
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
             Debug.Log(currentHP);
+            IFrame = IFrameTime;
         }
     }
 
@@ -174,12 +179,12 @@ public class PlayerControl : MonoBehaviour
 
     private void SetIFrameTrue()
     {
-        IFrame = true;
+        dodgeIFrame = true;
     }
 
     private void SetIFrameFalse()
     {
-        IFrame = false;
+        dodgeIFrame = false;
     }
 
     private void FinishAttack()

@@ -902,6 +902,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7632904489872538166, guid: 3f458969156389d428329bf7040132ab, type: 3}
+      propertyPath: IFrameTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
