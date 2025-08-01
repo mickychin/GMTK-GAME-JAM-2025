@@ -6,6 +6,7 @@ using UnityEngine;
 public class SwordmenEnemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private float maxHealth = 3f;
+    public float currentHealth;
     Animator animator;
     Rigidbody2D rb;
     [Header("Attacks")]
@@ -13,8 +14,6 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
     private bool isAttacking;
-
-    private float currentHealth;
 
     [Header("Player Detection")]
     [SerializeField] int playersLayer;
