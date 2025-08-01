@@ -1,16 +1,33 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
+
+    public Animator transition;
+
+    public float transitiontime = 1f;
+
     public void StartGame()
     {
-        SceneManager.LoadScene(2);
+        StartCoroutine(LoadLevel(2));
+        //SceneManager.LoadScene(2);
     }
 
     public void CloseGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitiontime);
+
+        SceneManager.LoadScene(levelIndex);
+
     }
 
 
