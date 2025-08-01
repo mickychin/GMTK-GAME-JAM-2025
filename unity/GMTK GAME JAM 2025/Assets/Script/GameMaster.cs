@@ -8,7 +8,13 @@ public class GameMaster : MonoBehaviour
     public float level = 0f;    
     public PlayerControl playerobj;
     private float Health, MaxHealth, Width = 500f, Height = 50f;
+    public GameObject DeathScreen;
     [SerializeField] private RectTransform healthBar;
+
+    void Start()
+    {
+        DeathScreen.SetActive(false);
+    }
 
     void Update()
     {
@@ -19,5 +25,12 @@ public class GameMaster : MonoBehaviour
         float newWidth = (Health / MaxHealth) * Width;
 
         healthBar.sizeDelta = new Vector2(newWidth, Height);
+
+    }
+
+    public void Die()
+    {
+        Debug.Log(playerobj.currentHP);
+            DeathScreen.SetActive(true);
     }
 }
