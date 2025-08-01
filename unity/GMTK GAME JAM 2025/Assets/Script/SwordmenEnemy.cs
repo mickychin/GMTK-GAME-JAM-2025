@@ -90,6 +90,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         }
     }
 
+    public void GotBlocked(float BlockKB)
+    {
+        rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
+    }
+
     private bool isBLock() //theres a chance of blocking after getting hit and not
     {
         if(Random.Range(1, 101) > 10) //90 percent to block

@@ -41,6 +41,18 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private float MaxStance;
     public float Stance;
+    [Header("Parry")]
+    [SerializeField] private float ParryCD; //parry cooldown
+    [SerializeField] private float CanParry; //if more than 0 can parry
+    [SerializeField] private float CanReleaseToParryTime;
+    [SerializeField] private float CanReleaseToParry; //if more than 0 can release right click to use parry
+    [SerializeField] private float ParryTime; //max duration of attack coming after pressing parry.
+    [SerializeField] private float Parry; //if more than 0 mean it is successful parrying
+    private bool IsParrying;
+    [SerializeField] private float BlockKB;
+    [SerializeField] private Transform ParryPos_1;
+    [SerializeField] private Transform ParryPos_2;
+    [SerializeField] private LayerMask AttacksLayer;
 
     private void Start()
     {
@@ -85,23 +97,47 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (!isRolling)
+        if (!isRolling && !IsParrying)
         {
             Flip();
             DodgeRollCheck();
         }
 
-        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)
+        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && !IsParrying)
         {
             //Debug.Log("FIRE!");
             animator.SetTrigger("Attack");
             Attack();
         }
+
+        CanReleaseToParry -= Time.deltaTime;
+        Parry -= Time.deltaTime;
+        CanParry += Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(1) && !isAttacking && !isRolling)
+        {
+            //right click
+            rb.velocity = Vector2.zero;
+            IsParrying = true;
+            animator.SetBool("Parry", true);
+            CanReleaseToParry = CanReleaseToParryTime;
+        }
+        if (Input.GetMouseButtonUp(1) && CanReleaseToParry > 0 && CanParry > 0)
+        {
+            //parry
+            Parry = ParryTime;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            animator.SetBool("Parry", false);
+            IsParrying = false;
+            CanParry = ParryCD * -1;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!isRolling && !isAttacking)
+        if (!isRolling && !isAttacking && !IsParrying)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -163,15 +199,42 @@ public class PlayerControl : MonoBehaviour
     {
         if(collision.gameObject.layer == DamageLayer_number && IFrame <= 0 && !dodgeIFrame)
         {
+            Debug.Log("HIt");
+            if (IsParryContact() && Parry > 0)
+            {
+                //PARRY
+                Debug.Log("PARRY");
+                CanParry = 1f;
+
+                collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
+                return;
+            }
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
-            Debug.Log(currentHP);
+            //Debug.Log(currentHP);
             IFrame = IFrameTime;
+        }
+    }
+
+    public bool IsParryContact()
+    {
+        Vector2 dir = ParryPos_2.position - ParryPos_1.position;
+        RaycastHit2D hit = Physics2D.Raycast(ParryPos_1.position, dir, Vector2.Distance(ParryPos_1.position, ParryPos_2.position), AttacksLayer);
+        if (hit)
+        {
+            Debug.Log(hit.collider.name);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
     private void OnDrawGizmosSelected()
     {
+        Vector2 dir = ParryPos_2.position - ParryPos_1.position;
+        Gizmos.DrawRay(ParryPos_1.position, dir);
         Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
 

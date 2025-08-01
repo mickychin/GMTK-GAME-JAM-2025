@@ -68,6 +68,7 @@ Transform:
   - {fileID: 8508618681983861607}
   - {fileID: 2700529211377722858}
   - {fileID: 240813576952511577}
+  - {fileID: 6929514960419360181}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &379946612976969881
@@ -163,15 +164,25 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rollDistance: 15
+  IFrameTime: 0
   IFrame: 0
   attackTransform: {fileID: 240813576952511577}
   attackRange: 0.3
   attackableLayer:
     serializedVersion: 2
     m_Bits: 128
-  damageAmount: 1
+  damageAmount: 20
   DamageLayer_number: 9
-  maxHP: 3
+  maxHP: 100
+  currentHP: 100
+  MaxStance: 0
+  Stance: 0
+  ParryCD: 0.5
+  CanParry: 0
+  CanReleaseToParryTime: 0.5
+  CanReleaseToParry: 0
+  ParryTime: 0.3
+  Parry: 0
 --- !u!95 &4155122711481232899
 Animator:
   serializedVersion: 5
@@ -228,6 +239,37 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0031290054, y: -0.007405281}
   m_Size: {x: 0.6939926, y: 1.3652477}
   m_Direction: 0
+--- !u!1 &6125537180006567517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6929514960419360181}
+  m_Layer: 8
+  m_Name: Parry Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6929514960419360181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125537180006567517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 83212693364132759}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7055451090975738474
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,8 +296,8 @@ Transform:
   m_GameObject: {fileID: 7055451090975738474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 1.4, z: 1}
+  m_LocalPosition: {x: 0, y: 0.21, z: 0}
+  m_LocalScale: {x: -0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 83212693364132759}
@@ -301,7 +343,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4d32ff00050a734bb180dc60487324d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

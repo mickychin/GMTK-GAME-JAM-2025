@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IDamagable 
 {
     public void Damage(float damageAmount);
+
+    public void GotBlocked(float BlockKB);
 }
