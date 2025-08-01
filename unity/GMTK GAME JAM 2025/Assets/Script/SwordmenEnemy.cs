@@ -11,8 +11,20 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] float DashDistance;
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
+    private bool isAttacking;
 
     private float currentHealth;
+
+    [SerializeField] int playersLayer;
+    [SerializeField] float EyeSightRange = 5f;
+    [SerializeField] LayerMask ThingEnemyCanSee;
+    RaycastHit2D hits;
+    private bool canSeePlayer;
+
+    [SerializeField] private Transform wallCheckTrans;
+    [SerializeField] private Transform GroundCheckTrans;
+    [SerializeField] LayerMask WallAndGroundLayer;
+    [SerializeField] private float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +32,19 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+    }
 
+    private void Update()
+    {
+        SeePlayerCheck();
+
+        Patrol();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Vector2 dir = FindObjectOfType<PlayerControl>().transform.position - transform.position;
+        Gizmos.DrawRay(transform.position, dir);
     }
 
     public void Damage(float damageAmount)
@@ -37,7 +61,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void Attack(int AttackMoveSet) //move set start at 1
     {
-        Debug.Log(AttackMoveSet);
+        isAttacking = true;
+        //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
         if (AttackMoveSet == 3)
         {
@@ -57,7 +82,55 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void AttackPattern()
     {
-        Attack(Random.Range(1, 5));
+        if(canSeePlayer == true)
+        {
+            Attack(Random.Range(1, 5));
+        }
+        else
+        {
+            animator.SetInteger("Attack", 0); //stop attack animation
+            isAttacking = false;
+        }
     }
     
+    private void SeePlayerCheck()
+    {
+        Vector2 dir = FindObjectOfType<PlayerControl>().transform.position - transform.position;
+        hits = Physics2D.Raycast(transform.position, dir, EyeSightRange, ThingEnemyCanSee);
+        //Debug.Log(hits.collider.name);
+        if (hits && hits.collider.GetComponent<PlayerControl>())
+        {
+            canSeePlayer = true;
+            if (isAttacking == false)
+            {
+                Attack(Random.Range(1, 5));
+            }
+        }
+        else
+        {
+            canSeePlayer = false;
+        }
+    }
+
+    private void Patrol()
+    {
+        if (!canSeePlayer)
+        {
+            rb.velocity = new Vector2(speed * transform.localScale.x, rb.velocity.y);
+        }
+
+        float wallCheckRadius = 0.1f;
+        hits = Physics2D.CircleCast(wallCheckTrans.position, wallCheckRadius, transform.right, 0f, WallAndGroundLayer); //check wall
+        if (hits && !canSeePlayer)
+        {
+            //flip!
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+        hits = Physics2D.CircleCast(GroundCheckTrans.position, wallCheckRadius, transform.right, 0f, WallAndGroundLayer); //check ground infront
+        if (!hits)
+        {
+            //flip!
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+    }
 }
