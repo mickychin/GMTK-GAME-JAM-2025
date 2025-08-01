@@ -4971,10 +4971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  Health: 0
-  MaxHealth: 0
-  Width: 500
-  Height: 50
+  playerobj: {fileID: 536579737401620529}
   healthBar: {fileID: 286523946}
 --- !u!1 &1503489926
 GameObject:
@@ -5289,7 +5286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 277, y: -46}
+  m_AnchoredPosition: {x: 298, y: -48}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643711974
@@ -5551,6 +5548,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 83212693364132759, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
   m_PrefabInstance: {fileID: 8576149536865066462}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &536579737401620529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4115098595137863108, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
+  m_PrefabInstance: {fileID: 8576149536865066462}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4a7721894b23c44b02889f92adec77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &944814781721011125
 Transform:
   m_ObjectHideFlags: 0
@@ -5817,11 +5825,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  DashDistance: 13
+  DashDistance: 10
   JumpHeight: 13
   jumpAttackDashDistance: 5
   playersLayer: 8
-  EyeSightRange: 5.84
+  EyeSightRange: 5.04
   ThingEnemyCanSee:
     serializedVersion: 2
     m_Bits: 320
@@ -6066,6 +6074,18 @@ PrefabInstance:
     - target: {fileID: 83212693364132759, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115098595137863108, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
+      propertyPath: maxHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115098595137863108, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
+      propertyPath: currentHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115098595137863108, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
+      propertyPath: damageAmount
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4497375370733183310, guid: 6c122ebf34dba45499e381ded507897c, type: 3}
       propertyPath: m_Name
