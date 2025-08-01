@@ -771,7 +771,7 @@ MonoBehaviour:
   WallAndGroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  speed: 3
+  speed: 5
 --- !u!95 &2051639111
 Animator:
   serializedVersion: 5

@@ -20,6 +20,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] LayerMask ThingEnemyCanSee;
     RaycastHit2D hits;
     private bool canSeePlayer;
+    private PlayerControl playerControl;
 
     [SerializeField] private Transform wallCheckTrans;
     [SerializeField] private Transform GroundCheckTrans;
@@ -29,6 +30,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
+        playerControl = FindObjectOfType<PlayerControl>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -39,12 +41,6 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         SeePlayerCheck();
 
         Patrol();
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Vector2 dir = FindObjectOfType<PlayerControl>().transform.position - transform.position;
-        Gizmos.DrawRay(transform.position, dir);
     }
 
     public void Damage(float damageAmount)
@@ -61,17 +57,26 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void Attack(int AttackMoveSet) //move set start at 1
     {
+        if(playerControl.transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+        else
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
+        }
+
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
         if (AttackMoveSet == 3)
         {
             //dash
-            rb.velocity = new Vector2(DashDistance, rb.velocity.y);
+            rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
         }
         else if (AttackMoveSet == 4)
         {
-            rb.velocity = new Vector2(jumpAttackDashDistance, JumpHeight);
+            rb.velocity = new Vector2(jumpAttackDashDistance * transform.localScale.x, JumpHeight);
         }
     }
 
@@ -95,7 +100,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     
     private void SeePlayerCheck()
     {
-        Vector2 dir = FindObjectOfType<PlayerControl>().transform.position - transform.position;
+        Vector2 dir = playerControl.transform.position - transform.position;
         hits = Physics2D.Raycast(transform.position, dir, EyeSightRange, ThingEnemyCanSee);
         //Debug.Log(hits.collider.name);
         if (hits && hits.collider.GetComponent<PlayerControl>())
