@@ -17,6 +17,7 @@ public class GameMaster : MonoBehaviour
     public Animator transition;
 
     [Header("Death Screen")]
+    private bool IsDead = false;
     public GameObject DeathScreen;
     [SerializeField] private RectTransform healthBar;
     public Text MainDeathTxt;
@@ -28,6 +29,7 @@ public class GameMaster : MonoBehaviour
     void Start()
     {
         DeathScreen.SetActive(false);
+        IsDead = false;
     }
 
     void Update()
@@ -49,13 +51,17 @@ public class GameMaster : MonoBehaviour
 
     public void Die()
     {
-        int DMR = Random.Range(0, MainDeathMessages.Length); 
-        MainDeathTxt.text= MainDeathMessages[DMR];
-        int DSR = Random.Range(0, SubDeathMessages.Length); 
-        SubDeathTxt.text= SubDeathMessages[DSR];
-        Debug.Log(playerobj.currentHP);
-        DeathScreen.SetActive(true);
-        StartCoroutine(GotoMainMenu());
+        if(IsDead == false)
+        {
+            IsDead = true;
+            int DMR = Random.Range(0, MainDeathMessages.Length); 
+            MainDeathTxt.text= MainDeathMessages[DMR];
+            int DSR = Random.Range(0, SubDeathMessages.Length); 
+            SubDeathTxt.text= SubDeathMessages[DSR];
+            Debug.Log(playerobj.currentHP);
+            DeathScreen.SetActive(true);
+            StartCoroutine(GotoMainMenu());
+        }
     }
 
     IEnumerator GotoMainMenu()
