@@ -31,7 +31,7 @@ public class GameMaster : MonoBehaviour
 
         healthBar.sizeDelta = new Vector2(newWidth, Height);
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Die();
         }
