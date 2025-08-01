@@ -36,8 +36,8 @@ public class PlayerControl : MonoBehaviour
     RaycastHit2D[] hits;
 
     [SerializeField] private int DamageLayer_number;
-    [SerializeField] private int maxHP;
-    private int currentHP;
+    public int maxHP;
+    public int currentHP;
 
     private void Start()
     {
