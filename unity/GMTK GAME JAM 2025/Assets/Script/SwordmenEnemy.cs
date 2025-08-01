@@ -8,6 +8,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] private float maxHealth = 3f;
     Animator animator;
     Rigidbody2D rb;
+    [Header("Attacks")]
     [SerializeField] float DashDistance;
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
@@ -15,6 +16,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private float currentHealth;
 
+    [Header("Player Detection")]
     [SerializeField] int playersLayer;
     [SerializeField] float EyeSightRange = 5f;
     [SerializeField] LayerMask ThingEnemyCanSee;
@@ -22,12 +24,17 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     private bool canSeePlayer;
     private PlayerControl playerControl;
 
+    [Header("MoveMent")]
     [SerializeField] private Transform wallCheckTrans;
     [SerializeField] private Transform GroundCheckTrans;
     [SerializeField] LayerMask WallAndGroundLayer;
     [SerializeField] private float speed;
 
-    public int currentCombo;
+    [Header("Stance")]
+    [SerializeField] private int MaxStance;
+    private int Stance;
+
+    private int currentCombo;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +81,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         if (AttackMoveSet == 3)
         {
             //dash
-            rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
+            //rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
         }
         else if (AttackMoveSet == 4)
         {
@@ -149,7 +156,12 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     private int getAttackPattern()
     {
         int[] patterns = { 311, 312, 4321, 1314, 42, 313, 133 }; //the attack pattern is actually read from back to front
-        int i = Random.Range(0, 7);
+        int i = Random.Range(0, patterns.Length);
         return patterns[i];
+    }
+
+    private void Dash()
+    {
+        rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
     }
 }
