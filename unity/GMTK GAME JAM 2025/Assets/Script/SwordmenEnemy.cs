@@ -31,11 +31,12 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     [Header("Stance")]
     [SerializeField] private float MaxStance;
+    [SerializeField] private float StancePerSecond = 5f;
     public float Stance;
     private bool isBlocking;
     private bool isStance_Break;
 
-    private int currentCombo;
+    public int currentCombo;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         SeePlayerCheck();
 
         Patrol();
+
+        Stance += StancePerSecond * Time.deltaTime;
     }
 
     public void Damage(float damageAmount)
@@ -62,6 +65,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         }
 
         currentCombo = 0;
+        isBlocking = isBLock();
+        animator.SetBool("Block", isBlocking);
         if (isBlocking)
         {
             Stance -= damageAmount;
@@ -83,9 +88,6 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
             //die
             Die();
         }
-
-        isBlocking = isBLock();
-        animator.SetBool("Block", isBlocking);
     }
 
     private bool isBLock() //theres a chance of blocking after getting hit and not
@@ -114,15 +116,6 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
-        if (AttackMoveSet == 3)
-        {
-            //dash
-            //rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
-        }
-        else if (AttackMoveSet == 4)
-        {
-            rb.velocity = new Vector2(jumpAttackDashDistance * transform.localScale.x, JumpHeight);
-        }
     }
 
     private  void Die()

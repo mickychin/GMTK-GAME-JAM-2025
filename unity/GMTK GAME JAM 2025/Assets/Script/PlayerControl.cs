@@ -39,6 +39,9 @@ public class PlayerControl : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
+    [SerializeField] private float MaxStance;
+    public float Stance;
+
     private void Start()
     {
         currentHP = maxHP;
