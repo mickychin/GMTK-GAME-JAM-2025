@@ -4482,6 +4482,11 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1503063537}
   m_ConfineScreenEdges: 1
   m_Damping: 0.33
+--- !u!95 &1049127421 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2598107505778191747, guid: a19cfbe661ff1b842827e02c71640ad6, type: 3}
+  m_PrefabInstance: {fileID: 4242904081087648622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1130959935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,7 +4800,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35763794, y: 0.39178768, z: -10}
+  m_LocalPosition: {x: 0.814972, y: 0.38827077, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5237,6 +5242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   playerobj: {fileID: 5629322298757455898}
+  transition: {fileID: 1049127421}
   DeathScreen: {fileID: 285738901}
   healthBar: {fileID: 286523946}
   MainDeathTxt: {fileID: 125211086}
@@ -5382,9 +5388,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 57247858}
-  - {fileID: 516767412}
   - {fileID: 1643711973}
+  - {fileID: 516767412}
+  - {fileID: 57247858}
   - {fileID: 285738902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
