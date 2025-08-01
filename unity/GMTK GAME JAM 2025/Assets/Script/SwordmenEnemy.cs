@@ -34,13 +34,14 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] private float MaxStance;
     public float Stance;
     private bool isBlocking;
+    private bool isStance_Break;
 
     private int currentCombo;
 
     // Start is called before the first frame update
     void Start()
     {
-        Stance = maxHealth;
+        Stance = MaxStance;
         playerControl = FindObjectOfType<PlayerControl>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -56,9 +57,22 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     public void Damage(float damageAmount)
     {
+        if (isStance_Break)
+        {
+            Die();
+        }
+
+        currentCombo = 0;
         if (isBlocking)
         {
             Stance -= damageAmount;
+
+            if(Stance <= 0)
+            {
+                //staggered
+                animator.SetTrigger("Stance_Break");
+                isStance_Break = true;
+            }
             return;
         }
         currentHealth -= damageAmount;
@@ -191,5 +205,10 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     private void StoppedBlocking()
     {
         isBlocking = false;
+    }
+
+    private void StoppedStance_Break()
+    {
+        isStance_Break = false;
     }
 }
