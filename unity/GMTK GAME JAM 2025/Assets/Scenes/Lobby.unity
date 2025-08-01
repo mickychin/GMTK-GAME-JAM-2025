@@ -6069,8 +6069,9 @@ MonoBehaviour:
   DamageLayer_number: 9
   maxHP: 100
   currentHP: 100
-  MaxStance: 0
+  MaxStance: 200
   Stance: 0
+  StancePerSecond: 5
   ParryCD: 0
   CanParry: 0
   CanReleaseToParryTime: 0.5

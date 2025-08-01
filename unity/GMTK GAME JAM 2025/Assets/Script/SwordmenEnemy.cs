@@ -54,7 +54,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
         Patrol();
 
-        Stance += StancePerSecond * Time.deltaTime;
+        Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
     }
 
     public void Damage(float damageAmount)

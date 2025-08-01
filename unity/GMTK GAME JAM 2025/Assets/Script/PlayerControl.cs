@@ -41,6 +41,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private float MaxStance;
     public float Stance;
+    [SerializeField] float StancePerSecond;
     [Header("Parry")]
     [SerializeField] private float ParryCD; //parry cooldown
     [SerializeField] private float CanParry; //if more than 0 can parry
@@ -56,6 +57,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        Stance = MaxStance;
         currentHP = maxHP;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -133,6 +135,8 @@ public class PlayerControl : MonoBehaviour
             IsParrying = false;
             CanParry = ParryCD * -1;
         }
+
+        Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
     }
 
     private void FixedUpdate()
@@ -207,6 +211,13 @@ public class PlayerControl : MonoBehaviour
                 CanParry = 1f;
 
                 collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
+                return;
+            }
+
+            if (IsParrying)
+            {
+                //block and lose stance
+                Stance -= collision.GetComponent<DamagePlayer>().Damage;
                 return;
             }
             //TAKE DAMAGE
