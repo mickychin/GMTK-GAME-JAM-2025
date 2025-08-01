@@ -191,7 +191,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private int getAttackPattern()
     {
-        int[] patterns = { 311, 312, 4321, 1314, 42, 313, 133 }; //the attack pattern is actually read from back to front
+        int[] patterns = { 331, 333, 313, 113 }; //the attack pattern is actually read from back to front
         int i = Random.Range(0, patterns.Length);
         return patterns[i];
     }
