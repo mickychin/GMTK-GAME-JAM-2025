@@ -224,6 +224,11 @@ public class PlayerControl : MonoBehaviour
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
             //Debug.Log(currentHP);
             IFrame = IFrameTime;
+
+            if(currentHP <= 0)
+            {
+                FindObjectOfType<GameMaster>().Die();
+            }
         }
     }
 

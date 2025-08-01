@@ -10,6 +10,11 @@ public class GameMaster : MonoBehaviour
     private float Health, MaxHealth, Width = 500f, Height = 50f;
     public GameObject DeathScreen;
     [SerializeField] private RectTransform healthBar;
+    public Text MainDeathTxt;
+    public string[] MainDeathMessages;
+    public Text SubDeathTxt; 
+    public string[] SubDeathMessages;
+   
 
     void Start()
     {
@@ -30,7 +35,8 @@ public class GameMaster : MonoBehaviour
 
     public void Die()
     {
+        int randomIndex = Random.Range(0, MainDeathMessages.Length); 
         Debug.Log(playerobj.currentHP);
-            DeathScreen.SetActive(true);
+        DeathScreen.SetActive(true);
     }
 }
