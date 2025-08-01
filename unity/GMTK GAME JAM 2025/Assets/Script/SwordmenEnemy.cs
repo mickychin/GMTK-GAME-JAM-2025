@@ -27,6 +27,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] LayerMask WallAndGroundLayer;
     [SerializeField] private float speed;
 
+    public int currentCombo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +91,12 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     {
         if(canSeePlayer == true)
         {
-            Attack(Random.Range(1, 5));
+            if(currentCombo == 0)
+            {
+                currentCombo = getAttackPattern();
+            }
+            Attack((int)((float)currentCombo % 10));
+            currentCombo /= 10;
         }
         else
         {
@@ -132,10 +139,17 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         }
         hits = Physics2D.CircleCast(GroundCheckTrans.position, wallCheckRadius, transform.right, 0f, WallAndGroundLayer); //check ground infront
-        if (!hits)
+        if (!hits && !canSeePlayer)
         {
             //flip!
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         }
+    }
+
+    private int getAttackPattern()
+    {
+        int[] patterns = { 311, 312, 4321, 1314, 42, 313, 133 }; //the attack pattern is actually read from back to front
+        int i = Random.Range(0, 7);
+        return patterns[i];
     }
 }
