@@ -31,11 +31,19 @@ public class GameMaster : MonoBehaviour
 
         healthBar.sizeDelta = new Vector2(newWidth, Height);
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Die();
+        }
+
     }
 
     public void Die()
     {
-        int randomIndex = Random.Range(0, MainDeathMessages.Length); 
+        int DMR = Random.Range(0, MainDeathMessages.Length); 
+        MainDeathTxt.text= MainDeathMessages[DMR];
+        int DSR = Random.Range(0, SubDeathMessages.Length); 
+        SubDeathTxt.text= SubDeathMessages[DSR];
         Debug.Log(playerobj.currentHP);
         DeathScreen.SetActive(true);
     }
