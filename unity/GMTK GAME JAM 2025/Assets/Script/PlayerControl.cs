@@ -88,7 +88,7 @@ public class PlayerControl : MonoBehaviour
             DodgeRollCheck();
         }
 
-        if (Input.GetMouseButtonDown(0) && !isRolling)
+        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)
         {
             //Debug.Log("FIRE!");
             animator.SetTrigger("Attack");

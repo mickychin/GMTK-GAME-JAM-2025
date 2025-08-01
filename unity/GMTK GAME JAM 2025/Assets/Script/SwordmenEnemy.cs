@@ -32,7 +32,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     [Header("Stance")]
     [SerializeField] private float MaxStance;
-    private float Stance;
+    public float Stance;
     private bool isBlocking;
 
     private int currentCombo;

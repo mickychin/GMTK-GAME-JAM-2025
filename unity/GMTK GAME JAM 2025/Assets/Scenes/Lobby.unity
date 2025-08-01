@@ -5658,7 +5658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1afd1badcd53604cb0b3ea35aa4bb9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 100
   DashDistance: 13
   JumpHeight: 13
   jumpAttackDashDistance: 5
@@ -5673,7 +5673,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   speed: 5
-  MaxStance: 0
+  MaxStance: 100
+  Stance: 0
 --- !u!1 &6166855725011665912
 GameObject:
   m_ObjectHideFlags: 0
