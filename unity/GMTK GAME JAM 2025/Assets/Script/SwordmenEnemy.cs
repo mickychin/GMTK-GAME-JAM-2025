@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordmenEnemy : MonoBehaviour, IDamagable
 {
@@ -39,6 +40,10 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     public int currentCombo;
 
+    [Header("Attacks")]
+    [SerializeField] private GameObject HealthBarUIPrefab;
+    private EnemyHP instantiatedHealthBarUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +52,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        InstantiateHealthBar();
     }
 
     private void Update()
@@ -83,6 +90,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         currentHealth -= damageAmount;
         animator.SetTrigger("Get_Hit");
         Debug.Log("DAMAGE TAKEN");
+
+        if (instantiatedHealthBarUI != null)
+        {
+            instantiatedHealthBarUI.UpdateHealthBar(currentHealth, maxHealth);
+        }
 
         if(currentHealth <= 0)
         {
@@ -135,6 +147,10 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private  void Die()
     {
+        if (instantiatedHealthBarUI != null)
+        {
+            Destroy(instantiatedHealthBarUI.gameObject);
+        }
         Destroy(gameObject);
     }
 
@@ -194,6 +210,29 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         {
             //flip!
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+    }
+
+    private void InstantiateHealthBar()
+    {
+        if(HealthBarUIPrefab != null)
+        {
+            GameObject healthBarObj = Instantiate(HealthBarUIPrefab);
+            instantiatedHealthBarUI = healthBarObj.GetComponent<EnemyHP>();
+
+            if(instantiatedHealthBarUI !=null)
+            {
+            instantiatedHealthBarUI.SetEnemy(this.transform, currentHealth, maxHealth);
+            }
+        }
+
+    }
+
+    void OnDestroy()
+    {
+        if (instantiatedHealthBarUI != null)
+        {
+            Destroy(instantiatedHealthBarUI.gameObject);
         }
     }
 
