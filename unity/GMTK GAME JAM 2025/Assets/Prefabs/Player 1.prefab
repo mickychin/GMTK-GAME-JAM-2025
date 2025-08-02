@@ -198,6 +198,8 @@ MonoBehaviour:
   rollDistance: 15
   IFrameTime: 0
   IFrame: 0
+  dodgeIFrame: 0
+  friction: 0.95
   attackTransform: {fileID: 1462609672778982778}
   attackRange: 0.72
   attackableLayer:

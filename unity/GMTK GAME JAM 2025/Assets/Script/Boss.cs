@@ -65,11 +65,6 @@ public class Boss : MonoBehaviour, IDamagable
             //walk
             Walk();
         }
-
-        if(IsGrounded())
-        {
-            rb.gravityScale = 1f;
-        }
     }
 
     public void Walk()
@@ -160,18 +155,11 @@ public class Boss : MonoBehaviour, IDamagable
         {
             ShootHorizontal();
         }
-
-        if(AttackMoveSet == 7)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                Shoot();
-            }
-        }
     }
 
     private void Shoot()
     {
+        /*
         Vector2 lookDir = playerControl.transform.position - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(bulletPrefabs);
@@ -179,6 +167,13 @@ public class Boss : MonoBehaviour, IDamagable
         Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
         bullet_rb.rotation = angle;
         bullet_rb.AddForce(lookDir.normalized * bulletForce, ForceMode2D.Impulse);
+        good bye
+        */
+        GameObject bullet = Instantiate(bulletPrefabs);
+        bullet.transform.position = firePoint.transform.position;
+        bullet.transform.localEulerAngles = firePoint.transform.localEulerAngles * transform.localScale.x;
+        Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
+        bullet_rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 
     private void ShootHorizontal()
@@ -228,7 +223,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     private int getAttackPattern()
     {
-        int[] patterns = { 75 }; //the attack pattern is actually read from back to front
+        int[] patterns = {75}; //the attack pattern is actually read from back to front
         int i = Random.Range(0, patterns.Length);
         return patterns[i];
     }
@@ -240,11 +235,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     private void Jump()
     {
-        if(IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, JumpHeight * transform.localScale.y);
-            rb.gravityScale = 0.1f;
-        }
+        transform.position = new Vector2(transform.position.x, transform.position.y + JumpHeight);
     }
 
     private void StoppedBlocking()

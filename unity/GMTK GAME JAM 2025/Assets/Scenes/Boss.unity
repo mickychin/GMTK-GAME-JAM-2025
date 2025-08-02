@@ -232,13 +232,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200281842}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.58531153, w: 0.81080854}
   m_LocalPosition: {x: 0.265, y: 0.241, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4639523172582939599}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -71.65}
 --- !u!1 &208272125
 GameObject:
   m_ObjectHideFlags: 3
@@ -14571,7 +14571,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.814972, y: 0.38827077, z: -10}
+  m_LocalPosition: {x: 0.35763794, y: 0.39178768, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14701,7 +14701,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   DashDistance: 10
-  JumpHeight: 6
+  JumpHeight: 2
   jumpAttackDashDistance: 5
   attackDamage: 10
   bulletPrefabs: {fileID: 44078381102393576, guid: aa176bf3e52a7f747ad89b963c5f0908, type: 3}

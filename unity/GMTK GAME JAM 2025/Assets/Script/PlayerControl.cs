@@ -224,6 +224,7 @@ public class PlayerControl : MonoBehaviour
     {
         if(collision.gameObject.layer == DamageLayer_number && IFrame <= 0 && !dodgeIFrame)
         {
+            FinishAttack();
             Debug.Log("HIt");
             if (isStanceBreak)
             {
@@ -233,6 +234,7 @@ public class PlayerControl : MonoBehaviour
             if (IsParryContact() && Parry > 0)
             {
                 //PARRY
+                CancelEveryAnim();
                 animator.SetTrigger("Parry_fr");
                 Debug.Log("PARRY");
                 CanParry = 1f;
