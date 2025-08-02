@@ -158,13 +158,22 @@ public class PlayerControl : MonoBehaviour
             animator.SetBool("Run", false);
         }
 
-        if(rb.velocity.y > 0f && !isAttacking && !IsParrying && !isRolling)
+        if(rb.velocity.y > 2f && !isAttacking && !IsParrying && !isRolling)
         {
             animator.SetBool("Jump", true);
         }
         else
         {
             animator.SetBool("Jump", false);
+        }
+
+        if (rb.velocity.y < -2f && !isAttacking && !IsParrying && !isRolling)
+        {
+            animator.SetBool("Fall", true);
+        }
+        else
+        {
+            animator.SetBool("Fall", false);
         }
     }
 
