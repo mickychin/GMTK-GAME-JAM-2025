@@ -93,6 +93,8 @@ public class PlayerControl : MonoBehaviour
 
         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0f && !isStanceBreak && !isAttacking)
         {
+            
+            animator.SetTrigger("Jump");
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
             coyoteTimeCounter = 0f;
