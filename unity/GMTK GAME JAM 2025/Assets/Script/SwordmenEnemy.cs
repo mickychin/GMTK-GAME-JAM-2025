@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordmenEnemy : MonoBehaviour, IDamagable
 {
@@ -39,6 +40,14 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     public int currentCombo;
 
+    [Header("Health Bar UI")]
+    [SerializeField] private GameObject HealthBarUI;
+    private EnemyHP instantiatedHealthBar;
+
+    [Header("Stance Bar UI")]
+    [SerializeField] private GameObject StanceBarUI;
+    private EnemyStance instantiatedStanceBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +56,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        InstantiateHealthBar();
+        InstantiateStanceBar();
     }
 
     private void Update()
@@ -56,6 +68,10 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         Patrol();
 
         Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
+         if (instantiatedStanceBar != null)
+        {
+            instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+        }
     }
 
     public void Damage(float damageAmount)
@@ -72,6 +88,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         {
             Stance -= damageAmount;
 
+            if (instantiatedStanceBar != null)
+            {
+                instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+            }
+
             if(Stance <= 0)
             {
                 //staggered
@@ -83,6 +104,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         currentHealth -= damageAmount;
         animator.SetTrigger("Get_Hit");
         Debug.Log("DAMAGE TAKEN");
+
+        if (instantiatedHealthBar != null)
+        {
+            instantiatedHealthBar.UpdateHealthBar(currentHealth, maxHealth);
+        }
 
         if(currentHealth <= 0)
         {
@@ -96,6 +122,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
 
         Stance -= attackDamage;
+
+        if (instantiatedStanceBar != null)
+        {
+            instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+        }
 
         if (Stance <= 0)
         {
@@ -135,6 +166,14 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private  void Die()
     {
+        if (instantiatedHealthBar != null)
+        {
+            Destroy(instantiatedHealthBar.gameObject);
+        }
+        if (instantiatedStanceBar != null)
+        {
+            Destroy(instantiatedStanceBar.gameObject);
+        }
         Destroy(gameObject);
     }
 
@@ -194,6 +233,48 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         {
             //flip!
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+    }
+
+    private void InstantiateHealthBar()
+    {
+        if(HealthBarUI != null)
+        {
+            GameObject healthBarObj = Instantiate(HealthBarUI);
+            instantiatedHealthBar = healthBarObj.GetComponent<EnemyHP>();
+
+            if(instantiatedHealthBar !=null)
+            {
+            instantiatedHealthBar.SetEnemy(this.transform, currentHealth, maxHealth);
+            }
+        }
+
+    }
+
+    private void InstantiateStanceBar()
+    {
+        if(StanceBarUI != null)
+        {
+            GameObject stanceBarObj = Instantiate(StanceBarUI);
+            instantiatedStanceBar = stanceBarObj.GetComponent<EnemyStance>();
+
+            if(instantiatedStanceBar !=null)
+            {
+            instantiatedStanceBar.SetEnemy(this.transform, Stance, MaxStance);
+            }
+        }
+
+    }
+
+    void OnDestroy()
+    {
+        if (instantiatedHealthBar != null)
+        {
+            Destroy(instantiatedHealthBar.gameObject);
+        }
+        if (instantiatedStanceBar != null)
+        {
+            Destroy(instantiatedStanceBar.gameObject);
         }
     }
 
