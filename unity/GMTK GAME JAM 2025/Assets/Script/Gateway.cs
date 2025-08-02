@@ -8,6 +8,11 @@ public class Gateway : MonoBehaviour
 {
     public GameMaster gameMaster;
     public int PlayerLayer = 8;
+
+    private int randomSceneIndex; 
+
+    public int minSceneIndex = 0;
+    public int maxSceneIndex = 3;
     
     public int Wowwyveryrandomfloatverycoolfrfrfrfr;
 
@@ -15,10 +20,9 @@ public class Gateway : MonoBehaviour
     {
         if(collideee.gameObject.layer == PlayerLayer)
         {
-            Wowwyveryrandomfloatverycoolfrfrfrfr = UnityEngine.Random.Range(0, 3);
-            Debug.Log(Wowwyveryrandomfloatverycoolfrfrfrfr);
+            randomSceneIndex = UnityEngine.Random.Range(minSceneIndex, maxSceneIndex);
             gameMaster.level = gameMaster.level + 1f;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(randomSceneIndex);
         }
     }
 

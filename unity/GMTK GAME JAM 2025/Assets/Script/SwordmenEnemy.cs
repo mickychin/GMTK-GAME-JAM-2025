@@ -10,6 +10,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     public float currentHealth;
     Animator animator;
     Rigidbody2D rb;
+
+    public GameObject Corspe;
+
     [Header("Attacks")]
     [SerializeField] float DashDistance;
     [SerializeField] float JumpHeight;
@@ -173,6 +176,10 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         if (instantiatedStanceBar != null)
         {
             Destroy(instantiatedStanceBar.gameObject);
+        }
+        if (Corspe != null)
+        {
+            GameObject EnemyCorspe = Instantiate(Corspe, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }
