@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float rollDistance;
     [SerializeField] private float IFrameTime;
     public float IFrame;
-    private bool dodgeIFrame;
+    public bool dodgeIFrame;
 
     private bool isAttacking;
     [Header("Attack")]
