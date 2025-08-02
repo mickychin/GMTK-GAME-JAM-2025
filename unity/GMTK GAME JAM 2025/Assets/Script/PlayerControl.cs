@@ -234,7 +234,7 @@ public class PlayerControl : MonoBehaviour
             }
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
-            animator.SetTrigger("Damage");
+            //animator.SetTrigger("Damage");
             //Debug.Log(currentHP);
             IFrame = IFrameTime;
 

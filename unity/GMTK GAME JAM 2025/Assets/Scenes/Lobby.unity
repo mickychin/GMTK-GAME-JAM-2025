@@ -6353,7 +6353,7 @@ MonoBehaviour:
   IFrameTime: 0
   IFrame: 0
   attackTransform: {fileID: 8382061184070803847}
-  attackRange: 0.3
+  attackRange: 0.72
   attackableLayer:
     serializedVersion: 2
     m_Bits: 128
