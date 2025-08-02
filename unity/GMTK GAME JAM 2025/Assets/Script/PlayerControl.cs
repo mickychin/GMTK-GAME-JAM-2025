@@ -27,6 +27,8 @@ public class PlayerControl : MonoBehaviour
     public float IFrame;
     public bool dodgeIFrame;
 
+    [SerializeField] float friction;
+
     private bool isAttacking;
     [Header("Attack")]
     [SerializeField] private Transform attackTransform;
@@ -111,8 +113,9 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && !IsParrying && !isStanceBreak)
         {
             //Debug.Log("FIRE!");
+            isAttacking = true;
             animator.SetTrigger("Attack");
-            Attack();
+            //Attack();
         }
 
         CanReleaseToParry -= Time.deltaTime;
@@ -156,9 +159,13 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isRolling && !IsParrying && !isStanceBreak)
+        if (!isRolling && !IsParrying && !isStanceBreak && !isAttacking)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+        if (isAttacking)
+        {
+            rb.velocity = new Vector2(rb.velocity.x * friction, rb.velocity.y * friction);
         }
     }
 
@@ -198,8 +205,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Attack()
     {
-        isAttacking = true;
-        rb.velocity = new Vector2();
+        //rb.velocity = new Vector2();
         hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0f, attackableLayer);
 
         for(int i = 0; i < hits.Length; i++)
@@ -227,6 +233,7 @@ public class PlayerControl : MonoBehaviour
             if (IsParryContact() && Parry > 0)
             {
                 //PARRY
+                animator.SetTrigger("Parry_fr");
                 Debug.Log("PARRY");
                 CanParry = 1f;
                 Stance = Stance + 15f;
