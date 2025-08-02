@@ -140,6 +140,16 @@ public class PlayerControl : MonoBehaviour
         }
 
         Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
+
+        float minSpeedForRunAnim = 0.1f;
+        if (MathF.Abs(rb.velocity.x) > minSpeedForRunAnim)
+        {
+            animator.SetBool("Run", true);
+        }
+        else
+        {
+            animator.SetBool("Run", false);
+        }
     }
 
     private void FixedUpdate()
