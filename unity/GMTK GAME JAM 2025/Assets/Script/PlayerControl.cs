@@ -91,7 +91,7 @@ public class PlayerControl : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        if (jumpBufferCounter > 0 && coyoteTimeCounter > 0f)
+        if (jumpBufferCounter > 0 && coyoteTimeCounter > 0f && !isStanceBreak && !isAttacking)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
@@ -292,7 +292,10 @@ public class PlayerControl : MonoBehaviour
 
     private void Die()
     {
+        animator.SetTrigger("Die");
         FindObjectOfType<GameMaster>().Die();
+        isStanceBreak = true; //so u cannot move
+        isAttacking = true; // same as above
     }
 
     public bool IsParryContact()
