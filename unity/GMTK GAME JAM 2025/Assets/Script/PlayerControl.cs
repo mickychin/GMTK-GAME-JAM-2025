@@ -124,6 +124,7 @@ public class PlayerControl : MonoBehaviour
             IsParrying = true;
             animator.SetBool("Parry", true);
             CanReleaseToParry = CanReleaseToParryTime;
+            Stance = Stance - 10f;
         }
         if (Input.GetMouseButtonUp(1) && CanReleaseToParry > 0 && CanParry > 0)
         {
@@ -215,7 +216,7 @@ public class PlayerControl : MonoBehaviour
                 //PARRY
                 Debug.Log("PARRY");
                 CanParry = 1f;
-
+                Stance = Stance + 15f;
                 collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
                 return;
             }

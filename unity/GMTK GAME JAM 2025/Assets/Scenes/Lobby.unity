@@ -6532,7 +6532,7 @@ MonoBehaviour:
   CanParry: 0
   CanReleaseToParryTime: 0.5
   CanReleaseToParry: 0
-  ParryTime: 0.2
+  ParryTime: 0.4
   Parry: 0
   BlockKB: 5
   ParryPos_1: {fileID: 1970604687}
