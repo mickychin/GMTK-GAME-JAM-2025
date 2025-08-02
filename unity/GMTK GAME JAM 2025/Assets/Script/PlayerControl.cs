@@ -55,6 +55,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform ParryPos_2;
     [SerializeField] private LayerMask AttacksLayer;
     private bool isStanceBreak;
+    [SerializeField] private GameObject ParryEffect;
 
     private void Start()
     {
@@ -217,6 +218,7 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log("PARRY");
                 CanParry = 1f;
                 Stance = Stance + 15f;
+                GameObject ParryVFX = Instantiate(ParryEffect, transform.position, Quaternion.identity);
                 collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
                 return;
             }
@@ -233,12 +235,12 @@ public class PlayerControl : MonoBehaviour
                 }
                 return;
             }
+
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
             //animator.SetTrigger("Damage");
             //Debug.Log(currentHP);
             IFrame = IFrameTime;
-
             if(currentHP <= 0)
             {
                 //die
