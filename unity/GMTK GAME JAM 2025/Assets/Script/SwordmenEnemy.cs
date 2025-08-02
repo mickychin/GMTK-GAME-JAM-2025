@@ -40,9 +40,13 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     public int currentCombo;
 
-    [Header("Attacks")]
-    [SerializeField] private GameObject HealthBarUIPrefab;
-    private EnemyHP instantiatedHealthBarUI;
+    [Header("Health Bar UI")]
+    [SerializeField] private GameObject HealthBarUI;
+    private EnemyHP instantiatedHealthBar;
+
+    [Header("Stance Bar UI")]
+    [SerializeField] private GameObject StanceBarUI;
+    private EnemyStance instantiatedStanceBar;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +58,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         currentHealth = maxHealth;
 
         InstantiateHealthBar();
+        InstantiateStanceBar();
     }
 
     private void Update()
@@ -63,6 +68,10 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         Patrol();
 
         Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
+         if (instantiatedStanceBar != null)
+        {
+            instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+        }
     }
 
     public void Damage(float damageAmount)
@@ -79,6 +88,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         {
             Stance -= damageAmount;
 
+            if (instantiatedStanceBar != null)
+            {
+                instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+            }
+
             if(Stance <= 0)
             {
                 //staggered
@@ -91,9 +105,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         animator.SetTrigger("Get_Hit");
         Debug.Log("DAMAGE TAKEN");
 
-        if (instantiatedHealthBarUI != null)
+        if (instantiatedHealthBar != null)
         {
-            instantiatedHealthBarUI.UpdateHealthBar(currentHealth, maxHealth);
+            instantiatedHealthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
 
         if(currentHealth <= 0)
@@ -108,6 +122,11 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
 
         Stance -= attackDamage;
+
+        if (instantiatedStanceBar != null)
+        {
+            instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+        }
 
         if (Stance <= 0)
         {
@@ -147,9 +166,13 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private  void Die()
     {
-        if (instantiatedHealthBarUI != null)
+        if (instantiatedHealthBar != null)
         {
-            Destroy(instantiatedHealthBarUI.gameObject);
+            Destroy(instantiatedHealthBar.gameObject);
+        }
+        if (instantiatedStanceBar != null)
+        {
+            Destroy(instantiatedStanceBar.gameObject);
         }
         Destroy(gameObject);
     }
@@ -215,14 +238,29 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void InstantiateHealthBar()
     {
-        if(HealthBarUIPrefab != null)
+        if(HealthBarUI != null)
         {
-            GameObject healthBarObj = Instantiate(HealthBarUIPrefab);
-            instantiatedHealthBarUI = healthBarObj.GetComponent<EnemyHP>();
+            GameObject healthBarObj = Instantiate(HealthBarUI);
+            instantiatedHealthBar = healthBarObj.GetComponent<EnemyHP>();
 
-            if(instantiatedHealthBarUI !=null)
+            if(instantiatedHealthBar !=null)
             {
-            instantiatedHealthBarUI.SetEnemy(this.transform, currentHealth, maxHealth);
+            instantiatedHealthBar.SetEnemy(this.transform, currentHealth, maxHealth);
+            }
+        }
+
+    }
+
+    private void InstantiateStanceBar()
+    {
+        if(StanceBarUI != null)
+        {
+            GameObject stanceBarObj = Instantiate(StanceBarUI);
+            instantiatedStanceBar = stanceBarObj.GetComponent<EnemyStance>();
+
+            if(instantiatedStanceBar !=null)
+            {
+            instantiatedStanceBar.SetEnemy(this.transform, Stance, MaxStance);
             }
         }
 
@@ -230,9 +268,13 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     void OnDestroy()
     {
-        if (instantiatedHealthBarUI != null)
+        if (instantiatedHealthBar != null)
         {
-            Destroy(instantiatedHealthBarUI.gameObject);
+            Destroy(instantiatedHealthBar.gameObject);
+        }
+        if (instantiatedStanceBar != null)
+        {
+            Destroy(instantiatedStanceBar.gameObject);
         }
     }
 
