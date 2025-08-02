@@ -9418,14 +9418,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 838368477437964644, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
-      propertyPath: ParryCD
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 838368477437964644, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
-      propertyPath: friction
-      value: 0.95
-      objectReference: {fileID: 0}
     - target: {fileID: 1462609672778982778, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.705

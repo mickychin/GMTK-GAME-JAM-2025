@@ -82,6 +82,7 @@ public class Boss : MonoBehaviour, IDamagable
             Die();
         }
 
+        isAttacking = false;
         currentCombo = 0;
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);
@@ -137,6 +138,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     private void Attack(int AttackMoveSet) //move set start at 1
     {
+        Debug.Log(AttackMoveSet);
         rb.velocity = Vector2.zero;
         if(playerControl.transform.position.x > transform.position.x)
         {
@@ -205,13 +207,16 @@ public class Boss : MonoBehaviour, IDamagable
 
     private void AttackPattern()
     {
-        if(Vector2.Distance(transform.position, playerControl.transform.position) < attackRange)
+        int lastDigitN = (int)((float)currentCombo % 10);
+        if (Vector2.Distance(transform.position, playerControl.transform.position) < attackRange || lastDigitN == 6 || lastDigitN == 7)
         {
             if(currentCombo == 0)
             {
                 currentCombo = getAttackPattern();
             }
-            Attack((int)((float)currentCombo % 10));
+            lastDigitN = (int)((float)currentCombo % 10);
+            //Debug.Log(currentCombo);
+            Attack(lastDigitN);
             currentCombo /= 10;
         }
         else

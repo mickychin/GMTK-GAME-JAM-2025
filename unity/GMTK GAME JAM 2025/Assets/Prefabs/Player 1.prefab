@@ -213,7 +213,7 @@ MonoBehaviour:
   Stance: 0
   StanceLosePerBlock: 10
   StancePerSecond: 5
-  ParryCD: 0.1
+  ParryCD: 0.5
   CanParry: 0
   CanReleaseToParryTime: 0.5
   CanReleaseToParry: 0

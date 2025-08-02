@@ -157,6 +157,15 @@ public class PlayerControl : MonoBehaviour
         {
             animator.SetBool("Run", false);
         }
+
+        if(rb.velocity.y > 0f && !isAttacking && !IsParrying && !isRolling)
+        {
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+        }
     }
 
     private void FixedUpdate()

@@ -14701,7 +14701,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   DashDistance: 10
-  JumpHeight: 2
+  JumpHeight: 4
   jumpAttackDashDistance: 5
   attackDamage: 10
   bulletPrefabs: {fileID: 44078381102393576, guid: aa176bf3e52a7f747ad89b963c5f0908, type: 3}
