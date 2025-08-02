@@ -32,6 +32,9 @@ public class Boss : MonoBehaviour, IDamagable
 
     public int currentCombo;
 
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,8 +62,17 @@ public class Boss : MonoBehaviour, IDamagable
         }
         else
         {
+            if(AttackMoveSet == 3 || AttackMoveSet == 7)
+            {
+                
+            }
             //walk
             Walk();
+        }
+
+        if(IsGrounded())
+        {
+            rb.gravityScale = 1f;
         }
     }
 
@@ -150,7 +162,15 @@ public class Boss : MonoBehaviour, IDamagable
 
         if(AttackMoveSet == 3)
         {
-            Shoot();
+            ShootHorizontal();
+        }
+
+        if(AttackMoveSet == 7)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Shoot();
+            }
         }
     }
 
@@ -163,6 +183,28 @@ public class Boss : MonoBehaviour, IDamagable
         Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
         bullet_rb.rotation = angle;
         bullet_rb.AddForce(lookDir.normalized * bulletForce, ForceMode2D.Impulse);
+    }
+
+    private void ShootHorizontal()
+    {
+        Vector2 playerPos = playerControl.transform.position - transform.position;
+        Vector2 ShootDirect;
+        float bulletAngle;
+        if (playerPos.x > 0)
+        {
+        ShootDirect = Vector2.right;
+        bulletAngle = 0f;
+        }
+        else
+        {
+        ShootDirect = Vector2.left;
+        bulletAngle = 180f;
+        }
+        GameObject bullet = Instantiate(bulletPrefabs);
+        bullet.transform.position = firePoint.transform.position;
+        Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
+        bullet_rb.rotation = bulletAngle;
+        bullet_rb.AddForce(ShootDirect * bulletForce, ForceMode2D.Impulse);
     }
 
     private  void Die()
@@ -190,7 +232,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     private int getAttackPattern()
     {
-        int[] patterns = { 1234}; //the attack pattern is actually read from back to front
+        int[] patterns = { 75 }; //the attack pattern is actually read from back to front
         int i = Random.Range(0, patterns.Length);
         return patterns[i];
     }
@@ -198,6 +240,15 @@ public class Boss : MonoBehaviour, IDamagable
     private void Dash()
     {
         rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
+    }
+
+    private void Jump()
+    {
+        if(IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, JumpHeight * transform.localScale.y);
+            rb.gravityScale = 0.1f;
+        }
     }
 
     private void StoppedBlocking()
@@ -208,5 +259,10 @@ public class Boss : MonoBehaviour, IDamagable
     private void StoppedStance_Break()
     {
         isStance_Break = false;
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 }
