@@ -62,10 +62,6 @@ public class Boss : MonoBehaviour, IDamagable
         }
         else
         {
-            if(AttackMoveSet == 3 || AttackMoveSet == 7)
-            {
-                
-            }
             //walk
             Walk();
         }
