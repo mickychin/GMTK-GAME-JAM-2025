@@ -554,6 +554,8 @@ MonoBehaviour:
   StancePerSecond: 5
   Stance: 0
   currentCombo: 0
+  HealthBarUI: {fileID: 8388068485579534967, guid: 81d9bc7ad442a624baf160c9500ed0d1, type: 3}
+  StanceBarUI: {fileID: 146914836190091198, guid: 633e46ee56ed2614bb6e2797e944ff5e, type: 3}
 --- !u!95 &8693685257987979387
 Animator:
   serializedVersion: 5
