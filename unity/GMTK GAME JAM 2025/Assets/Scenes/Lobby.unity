@@ -6136,7 +6136,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -6540,6 +6540,7 @@ MonoBehaviour:
   AttacksLayer:
     serializedVersion: 2
     m_Bits: 512
+  ParryEffect: {fileID: 9177868642122428478, guid: 4d9167b53af040045a044d799f2b6550, type: 3}
 --- !u!95 &5669306836806153181
 Animator:
   serializedVersion: 5
