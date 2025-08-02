@@ -6528,7 +6528,7 @@ MonoBehaviour:
   MaxStance: 100
   Stance: 0
   StancePerSecond: 5
-  ParryCD: 0
+  ParryCD: 0.1
   CanParry: 0
   CanReleaseToParryTime: 0.5
   CanReleaseToParry: 0
