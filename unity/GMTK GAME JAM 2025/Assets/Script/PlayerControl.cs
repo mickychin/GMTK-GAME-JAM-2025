@@ -156,7 +156,7 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isRolling && !isAttacking && !IsParrying && !isStanceBreak)
+        if (!isRolling && !IsParrying && !isStanceBreak)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
