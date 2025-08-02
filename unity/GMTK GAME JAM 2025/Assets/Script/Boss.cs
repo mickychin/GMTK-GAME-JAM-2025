@@ -14,15 +14,13 @@ public class Boss : MonoBehaviour, IDamagable
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
     [SerializeField] float attackDamage;
+    [SerializeField] GameObject bulletPrefabs;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float bulletForce = 20f;
     private bool isAttacking;
 
     private PlayerControl playerControl;
     [SerializeField] private float attackRange;
-
-    [Header("MoveMent")]
-    [SerializeField] private Transform wallCheckTrans;
-    [SerializeField] private Transform GroundCheckTrans;
-    [SerializeField] LayerMask WallAndGroundLayer;
     [SerializeField] private float speed;
 
     [Header("Stance")]
@@ -84,6 +82,7 @@ public class Boss : MonoBehaviour, IDamagable
         currentCombo = 0;
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);
+        animator.SetTrigger("Hit");
         if (isBlocking)
         {
             Stance -= damageAmount;
@@ -97,7 +96,7 @@ public class Boss : MonoBehaviour, IDamagable
             return;
         }
         currentHealth -= damageAmount;
-        animator.SetTrigger("Get_Hit");
+        //animator.SetTrigger("Get_Hit");
         Debug.Log("DAMAGE TAKEN");
 
         if(currentHealth <= 0)
@@ -148,6 +147,22 @@ public class Boss : MonoBehaviour, IDamagable
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
+
+        if(AttackMoveSet == 3)
+        {
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        Vector2 lookDir = playerControl.transform.position - transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        GameObject bullet = Instantiate(bulletPrefabs);
+        bullet.transform.position = firePoint.transform.position;
+        Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
+        bullet_rb.rotation = angle;
+        bullet_rb.AddForce(lookDir.normalized * bulletForce, ForceMode2D.Impulse);
     }
 
     private  void Die()

@@ -231,7 +231,11 @@ public class PlayerControl : MonoBehaviour
                 CanParry = 1f;
                 Stance = Stance + 15f;
                 GameObject ParryVFX = Instantiate(ParryEffect, transform.position, Quaternion.identity);
-                collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
+                if (!collision.CompareTag("Bullet"))
+                {
+                    collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
+                }
+                bulletDetection(collision.gameObject);
                 return;
             }
 
@@ -240,6 +244,7 @@ public class PlayerControl : MonoBehaviour
                 //block and lose stance
                 Stance -= collision.GetComponent<DamagePlayer>().Damage;
                 CheckStanceBreak();
+                bulletDetection(collision.gameObject);
                 return;
             }
 
@@ -255,6 +260,15 @@ public class PlayerControl : MonoBehaviour
                 //die
                 Die();
             }
+            bulletDetection(collision.gameObject);
+        }
+    }
+
+    private void bulletDetection(GameObject isBullet)
+    {
+        if (isBullet.CompareTag("Bullet"))
+        {
+            Destroy(isBullet);
         }
     }
 
