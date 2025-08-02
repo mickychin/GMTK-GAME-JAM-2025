@@ -11,7 +11,15 @@ public class GameMaster : MonoBehaviour
     
     [Header("Health Bar")]
     public PlayerControl playerobj;
-    private float Health, MaxHealth, Width = 500f, Height = 50f;
+    [SerializeField] private float Health, MaxHealth, Width = 500f, Height = 50f;
+    [SerializeField] private RectTransform healthBar;
+    [SerializeField] private float healthBarSmoothingSpeed = 10f; 
+
+    [Header("Stance Bar")]
+    [SerializeField] private float Stance, MaxStance, Swidth = 800f, Sheight = 50f;
+    [SerializeField] private RectTransform stanceBar;
+    [SerializeField] private float stanceBarSmoothingSpeed = 10f;
+    [SerializeField] private GameObject SBARObj;
 
     [Header("Transitions")]
     public Animator transition;
@@ -19,7 +27,6 @@ public class GameMaster : MonoBehaviour
     [Header("Death Screen")]
     private bool IsDead = false;
     public GameObject DeathScreen;
-    [SerializeField] private RectTransform healthBar;
     public Text MainDeathTxt;
     public string[] MainDeathMessages;
     public Text SubDeathTxt; 
@@ -30,6 +37,12 @@ public class GameMaster : MonoBehaviour
     {
         DeathScreen.SetActive(false);
         IsDead = false;
+
+        if (playerobj != null)
+        {
+            healthBar.sizeDelta = new Vector2((playerobj.currentHP / playerobj.maxHP) * Width, Height);
+            stanceBar.sizeDelta = new Vector2(((playerobj.MaxStance - playerobj.Stance) / playerobj.MaxStance) * Swidth, Sheight);
+        }
     }
 
     void Update()
@@ -38,9 +51,26 @@ public class GameMaster : MonoBehaviour
 
         Health = playerobj.currentHP;
 
-        float newWidth = (Health / MaxHealth) * Width;
+        MaxStance = playerobj.MaxStance;
 
-        healthBar.sizeDelta = new Vector2(newWidth, Height);
+        Stance = playerobj.Stance;
+
+        float HPBarTargetIdk = (Health / MaxHealth) * Width;
+        float HPBarRn = healthBar.sizeDelta.x;
+        float SHealthWidth = Mathf.Lerp(HPBarRn, HPBarTargetIdk, Time.deltaTime * healthBarSmoothingSpeed);
+        healthBar.sizeDelta = new Vector2(SHealthWidth, Height);
+
+        float SBARTargetIDk = ((MaxStance - Stance) / MaxStance) * Swidth;
+        float SBarRN = stanceBar.sizeDelta.x;
+        float SStanceWidth = Mathf.Lerp(SBarRN, SBARTargetIDk, Time.deltaTime * stanceBarSmoothingSpeed);
+        stanceBar.sizeDelta = new Vector2(SStanceWidth, Sheight);
+
+        if(Stance < 100)
+        {
+            SBARObj.SetActive(true);
+        } else {
+            SBARObj.SetActive(false);
+        }
 
         if (Input.GetKeyDown(KeyCode.P))
         {

@@ -39,7 +39,7 @@ public class PlayerControl : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
-    [SerializeField] private float MaxStance;
+    public float MaxStance;
     public float Stance;
     [SerializeField] float StancePerSecond;
     [Header("Parry")]
