@@ -4494,7 +4494,7 @@ Transform:
   m_GameObject: {fileID: 908963135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.71, y: 0.4, z: -10}
+  m_LocalPosition: {x: -4.01, y: -1.33, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4911,7 +4911,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.814972, y: 0.38827077, z: -10}
+  m_LocalPosition: {x: 0.812345, y: 0.047490615, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5542,8 +5542,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMaster: {fileID: 1503063539}
   PlayerLayer: 8
-  minSceneIndex: 0
-  maxSceneIndex: 3
+  minSceneIndex: 2
+  maxSceneIndex: 2
   Wowwyveryrandomfloatverycoolfrfrfrfr: 0
 --- !u!61 &1641990452
 BoxCollider2D:
@@ -6116,7 +6116,7 @@ PrefabInstance:
     - target: {fileID: 3561742112352159982, guid: 7aae5e4d6f09ed540b2726b7465f12bb, type: 3}
       propertyPath: Corspe
       value: 
-      objectReference: {fileID: 503682206074741019, guid: ea9d152751425794388806548a9c780e, type: 3}
+      objectReference: {fileID: 5522587570237296691, guid: 88f102369956c7a47bd783dff0cdbd2e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6260,11 +6260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8551144822334891039, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.71
+      value: -4.01
       objectReference: {fileID: 0}
     - target: {fileID: 8551144822334891039, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: -1.33
       objectReference: {fileID: 0}
     - target: {fileID: 8551144822334891039, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
       propertyPath: m_LocalPosition.z
