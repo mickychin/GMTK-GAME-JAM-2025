@@ -41,6 +41,7 @@ public class PlayerControl : MonoBehaviour
 
     public float MaxStance;
     public float Stance;
+    [SerializeField] float StanceLosePerBlock = 10f;
     [SerializeField] float StancePerSecond;
     [Header("Parry")]
     [SerializeField] private float ParryCD; //parry cooldown
@@ -125,7 +126,8 @@ public class PlayerControl : MonoBehaviour
             IsParrying = true;
             animator.SetBool("Parry", true);
             CanReleaseToParry = CanReleaseToParryTime;
-            Stance = Stance - 10f;
+            Stance -= StanceLosePerBlock;
+            CheckStanceBreak();
         }
         if (Input.GetMouseButtonUp(1) && CanReleaseToParry > 0 && CanParry > 0)
         {
@@ -237,18 +239,14 @@ public class PlayerControl : MonoBehaviour
             {
                 //block and lose stance
                 Stance -= collision.GetComponent<DamagePlayer>().Damage;
-                if (Stance <= 0f)
-                {
-                    isStanceBreak = true;
-                    animator.SetTrigger("Stance_Break");
-                    rb.velocity = Vector2.zero;
-                }
+                CheckStanceBreak();
                 return;
             }
 
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
             animator.SetTrigger("Damage");
+            CancelEveryAnim();
             //animator.SetTrigger("Damage");
             //Debug.Log(currentHP);
             IFrame = IFrameTime;
@@ -257,6 +255,17 @@ public class PlayerControl : MonoBehaviour
                 //die
                 Die();
             }
+        }
+    }
+
+    private void CheckStanceBreak()
+    {
+        if (Stance <= 0f)
+        {
+            CancelEveryAnim();
+            isStanceBreak = true;
+            animator.SetTrigger("Stance_Break");
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -310,5 +319,13 @@ public class PlayerControl : MonoBehaviour
     private void FinishStanceBreak()
     {
         isStanceBreak = false;
+    }
+
+    private void CancelEveryAnim()
+    {
+        isAttacking = false;
+        dodgeIFrame = false;
+        isRolling = false;
+        IsParrying = false;
     }
 }
