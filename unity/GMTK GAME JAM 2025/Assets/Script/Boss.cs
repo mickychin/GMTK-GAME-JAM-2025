@@ -18,6 +18,7 @@ public class Boss : MonoBehaviour, IDamagable
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletForce = 20f;
     private bool isAttacking;
+    private float Gravity_Scale;
 
     private PlayerControl playerControl;
     [SerializeField] private float attackRange;
@@ -241,6 +242,13 @@ public class Boss : MonoBehaviour, IDamagable
     private void Jump()
     {
         transform.position = new Vector2(transform.position.x, transform.position.y + JumpHeight);
+        Gravity_Scale = rb.gravityScale;
+        rb.gravityScale = 0;
+    }
+
+    private void StopFlying()
+    {
+        rb.gravityScale = Gravity_Scale;
     }
 
     private void StoppedBlocking()
