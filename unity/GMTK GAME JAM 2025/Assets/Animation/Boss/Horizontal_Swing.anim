@@ -85,6 +85,8 @@ AnimationClip:
       value: {fileID: 21300000, guid: 65321ed26c085cb43a9e9b62da9f76b4, type: 3}
     - time: 1
       value: {fileID: 21300000, guid: c9be65c2e562e2947a2f4bfc86f9ef4f, type: 3}
+    - time: 1.0833334
+      value: {fileID: 21300000, guid: c9be65c2e562e2947a2f4bfc86f9ef4f, type: 3}
     attribute: m_Sprite
     path: Enemy Sprite
     classID: 212
@@ -129,12 +131,13 @@ AnimationClip:
     - {fileID: 21300000, guid: cdaa3014453a2314baba4f8750618319, type: 3}
     - {fileID: 21300000, guid: 65321ed26c085cb43a9e9b62da9f76b4, type: 3}
     - {fileID: 21300000, guid: c9be65c2e562e2947a2f4bfc86f9ef4f, type: 3}
+    - {fileID: 21300000, guid: c9be65c2e562e2947a2f4bfc86f9ef4f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0166667
+    m_StopTime: 1.1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -193,7 +196,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1
+  - time: 1.0833334
     functionName: AttackPattern
     data: 
     objectReferenceParameter: {fileID: 0}

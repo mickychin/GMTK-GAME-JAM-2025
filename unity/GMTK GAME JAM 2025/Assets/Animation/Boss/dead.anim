@@ -42,6 +42,8 @@ AnimationClip:
       value: {fileID: 21300000, guid: 4b4f1a13792c22a4b8d880c0bf1c5507, type: 3}
     - time: 0.9166667
       value: {fileID: 21300000, guid: 86b60f92bbd627f42a2761846919efd7, type: 3}
+    - time: 1
+      value: {fileID: 21300000, guid: 86b60f92bbd627f42a2761846919efd7, type: 3}
     attribute: m_Sprite
     path: Enemy Sprite
     classID: 212
@@ -75,12 +77,13 @@ AnimationClip:
     - {fileID: 21300000, guid: 503b6002a96dba84588a01eac1652258, type: 3}
     - {fileID: 21300000, guid: 4b4f1a13792c22a4b8d880c0bf1c5507, type: 3}
     - {fileID: 21300000, guid: 86b60f92bbd627f42a2761846919efd7, type: 3}
+    - {fileID: 21300000, guid: 86b60f92bbd627f42a2761846919efd7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.93333334
+    m_StopTime: 1.0166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
