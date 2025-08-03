@@ -284,8 +284,16 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("HIt");
             if (isStanceBreak)
             {
-                FindObjectOfType<GameMaster>().Die();
-                Die();
+                currentHP -= 100;
+                FindObjectOfType<GameManager>().Player_HP = currentHP;
+                animator.SetTrigger("Damage");
+                CancelEveryAnim();
+                IFrame = IFrameTime;
+                if(currentHP <= 0)
+                {
+                    Die();
+                }
+                bulletDetection(collision.gameObject);
             }
 
             if (IsParryContact() && Parry > 0)
