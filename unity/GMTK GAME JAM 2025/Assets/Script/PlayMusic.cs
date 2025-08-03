@@ -5,18 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class PlayMusic : MonoBehaviour
 {
+    private static PlayMusic instance;
+
     private AudioSource musicSource;
     [SerializeField] AudioClip MainMenu_Music;
     [SerializeField] AudioClip Battle_Music;
+    [SerializeField] AudioClip Boss_Music;
 
-    private void Start()
+    private void Awake()
     {
-        if(FindObjectsOfType<AudioSource>().Length >= 2)
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
         }
+    }
 
-        DontDestroyOnLoad(gameObject);
+    private void Start()
+    {
         musicSource = GetComponent<AudioSource>();
     }
 
@@ -34,5 +44,28 @@ public class PlayMusic : MonoBehaviour
             musicSource.clip = Battle_Music;
             musicSource.Play();
         }
+        if (scene.name == "Boss")
+        {
+            musicSource.clip = Boss_Music;
+            musicSource.Play();
+        }
+    }
+
+    public void playMainMusic()
+    {
+        musicSource.clip = MainMenu_Music;
+        musicSource.Play();
+    }
+
+    public void playBattleMusic()
+    {
+        musicSource.clip = Battle_Music;
+        musicSource.Play();
+    }
+
+    public void playBossMusic()
+    {
+        musicSource.clip = Boss_Music;
+        musicSource.Play();
     }
 }

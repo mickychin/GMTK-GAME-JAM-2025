@@ -29,12 +29,13 @@ public class Gateway : MonoBehaviour
         {
             Heal(HealAmount);
             randomSceneIndex = UnityEngine.Random.Range(minSceneIndex, maxSceneIndex);
-            FindObjectOfType<GameManager>().CurrentLV = gameMaster.CurrentLV + 1;
+            FindObjectOfType<GameManager>().CurrentLV += 1;
             SceneManager.LoadScene(randomSceneIndex);
         }
 
         if(FindObjectOfType<GameManager>().CurrentLV > 5)
         {
+            FindObjectOfType<PlayMusic>().playBossMusic();
             SceneManager.LoadScene(BossRoom);
         }
     }
