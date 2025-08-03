@@ -14571,7 +14571,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.814972, y: 0.38827077, z: -10}
+  m_LocalPosition: {x: 0.35763794, y: 0.39178768, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14700,7 +14700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  DashDistance: 30
+  DashDistance: 15
   JumpHeight: 3
   jumpAttackDashDistance: 5
   attackDamage: 10
@@ -14718,7 +14718,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  patterns: 41000000e00000002c000000de000000a51900002b0000004d010000de00000004000000
+  patterns: 41000000e00000002c000000de000000a51900002b0000004d010000de000000040000004b000000
 --- !u!1 &1400561492
 GameObject:
   m_ObjectHideFlags: 0
