@@ -67,10 +67,16 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         Stance = MaxStance;
-        gameManager = FindObjectOfType<GameManager>();
-        currentHP = gameManager.Player_HP;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        gameManager = FindObjectOfType<GameManager>();
+        currentHP = gameManager.Player_HP;
     }
 
     void Update()
@@ -164,7 +170,7 @@ public class PlayerControl : MonoBehaviour
             animator.SetBool("Run", false);
         }
 
-        if(rb.velocity.y > 2f && !isAttacking && !IsParrying && !isRolling && (animator.GetBool("Jump") || jumpBufferCounter > 0 && coyoteTimeCounter > 0f))
+        if(rb.velocity.y > 2f && !isAttacking && !IsParrying && !isRolling && (animator.GetBool("Jump") || jumpBufferCounter > 0 ))
         {
             animator.SetBool("Jump", true);
         }
@@ -286,7 +292,7 @@ public class PlayerControl : MonoBehaviour
 
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
-            gameManager.Player_HP = currentHP;
+            FindObjectOfType<GameManager>().Player_HP = currentHP;
             animator.SetTrigger("Damage");
             CancelEveryAnim();
             //animator.SetTrigger("Damage");
