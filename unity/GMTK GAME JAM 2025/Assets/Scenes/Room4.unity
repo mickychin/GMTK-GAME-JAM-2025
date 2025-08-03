@@ -6144,6 +6144,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2665394149764786761, guid: 780037be5afd0fc46ba9efca7a2ede9b, type: 3}
+      propertyPath: m_IsGlobal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3083848781519429506, guid: 780037be5afd0fc46ba9efca7a2ede9b, type: 3}
       propertyPath: m_Name
       value: Post Procesing
