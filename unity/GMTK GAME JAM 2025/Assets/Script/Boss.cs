@@ -96,6 +96,7 @@ public class Boss : MonoBehaviour, IDamagable
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);
         animator.SetTrigger("Hit");
+        Debug.Log("HIT");
         if (isBlocking)
         {
             Stance -= damageAmount;
@@ -147,7 +148,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     private void Attack(int AttackMoveSet) //move set start at 1
     {
-        Debug.Log(AttackMoveSet);
+        //Debug.Log(AttackMoveSet);
         rb.velocity = Vector2.zero;
         if(playerControl.transform.position.x > transform.position.x)
         {
@@ -211,7 +212,9 @@ public class Boss : MonoBehaviour, IDamagable
 
     private  void Die()
     {
-        Destroy(gameObject);
+        float BossDeathAnimation = 1f;
+        animator.SetTrigger("dead");
+        Destroy(gameObject, BossDeathAnimation);
     }
 
     private void AttackPattern()
