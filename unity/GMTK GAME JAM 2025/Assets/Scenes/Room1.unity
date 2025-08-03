@@ -6531,6 +6531,7 @@ MonoBehaviour:
   - Thou art a fool
   - Death comes for us all
   - If you win, I'll sit on your face ~
+  WinScreen: {fileID: 0}
 --- !u!1 &1503489926
 GameObject:
   m_ObjectHideFlags: 0
@@ -7140,22 +7141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2036802682484769359, guid: 7aae5e4d6f09ed540b2726b7465f12bb, type: 3}
-      propertyPath: m_Size.x
-      value: 19.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2036802682484769359, guid: 7aae5e4d6f09ed540b2726b7465f12bb, type: 3}
-      propertyPath: m_Size.y
-      value: 10.8
-      objectReference: {fileID: 0}
     - target: {fileID: 2892284551439771900, guid: 7aae5e4d6f09ed540b2726b7465f12bb, type: 3}
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3561742112352159982, guid: 7aae5e4d6f09ed540b2726b7465f12bb, type: 3}
-      propertyPath: Corspe
-      value: 
-      objectReference: {fileID: 5522587570237296691, guid: 88f102369956c7a47bd783dff0cdbd2e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

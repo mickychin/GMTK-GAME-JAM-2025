@@ -18,6 +18,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
     [SerializeField] float attackDamage;
+    [SerializeField] GameObject Hit_particle;
     private bool isAttacking;
 
     [Header("Player Detection")]
@@ -84,6 +85,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
             Die();
         }
 
+        Instantiate(Hit_particle, transform.position, Quaternion.identity);
         currentCombo = 0;
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);

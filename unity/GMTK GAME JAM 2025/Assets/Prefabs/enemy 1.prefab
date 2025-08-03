@@ -231,10 +231,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  Corspe: {fileID: 5522587570237296691, guid: 88f102369956c7a47bd783dff0cdbd2e, type: 3}
   DashDistance: 10
   JumpHeight: 13
   jumpAttackDashDistance: 5
   attackDamage: 30
+  Hit_particle: {fileID: 1612197673494161886, guid: 16e0533c8499e8d4b84215791621cbd6, type: 3}
   playersLayer: 8
   EyeSightRange: 5.04
   ThingEnemyCanSee:
@@ -386,7 +388,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
