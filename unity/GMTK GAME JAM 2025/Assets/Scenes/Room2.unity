@@ -7660,8 +7660,6 @@ MonoBehaviour:
   bulletPrefabs: {fileID: 44078381102393576, guid: aa176bf3e52a7f747ad89b963c5f0908, type: 3}
   bulletForce: 5
   firePoint: {fileID: 80783044}
-  fireCD: 2
-  IsFireCD: 0
   playersLayer: 8
   EyeSightRange: 15
   ThingEnemyCanSee:

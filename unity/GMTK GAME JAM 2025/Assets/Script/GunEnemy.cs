@@ -90,6 +90,8 @@ public class GunEnemy : MonoBehaviour, IDamagable
         currentCombo = 0;
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);
+        animator.SetInteger("Attack", 0);
+        isAttacking = false;
         //animator.SetTrigger("Get_Hit");
         if (isBlocking)
         {
