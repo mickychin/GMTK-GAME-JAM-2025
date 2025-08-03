@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour, IDamagable
     [SerializeField] GameObject bulletPrefabs;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletForce = 20f;
+    private bool isDashing;
     private bool isAttacking;
     private float Gravity_Scale;
     [SerializeField] private float ImpaleDropRate;
@@ -99,6 +100,11 @@ public class Boss : MonoBehaviour, IDamagable
 
     public void Walk()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         float X_Distance = playerControl.transform.position.x - transform.position.x;
         float dir = X_Distance / Mathf.Abs(X_Distance);
         float X_Distance_for_boss_to_turn = 0.1f;
@@ -115,6 +121,8 @@ public class Boss : MonoBehaviour, IDamagable
 
     public void Damage(float damageAmount)
     {
+        isDashing = false;
+
         if (isStance_Break)
         {
             float Staggered_Damage = 100f;
@@ -316,6 +324,16 @@ public class Boss : MonoBehaviour, IDamagable
     private void Dash()
     {
         rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
+    }
+
+    private void IsDashing()
+    {
+        isDashing = true;
+    }
+
+    private void IsNotDashing()
+    {
+        isDashing = false;
     }
 
     private void Jump()

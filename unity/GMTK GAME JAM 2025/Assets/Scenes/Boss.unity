@@ -13682,7 +13682,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9790955, y: 0.38701048, z: -10}
+  m_LocalPosition: {x: 0.34778267, y: 0.39186516, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13780,7 +13780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 300
   currentHealth: 0
-  DashDistance: 20
+  DashDistance: 10
   JumpHeight: 3
   jumpAttackDashDistance: 5
   attackDamage: 10
@@ -15989,6 +15989,10 @@ PrefabInstance:
     - target: {fileID: 4639523173712114115, guid: 05969af2937930f4192a693be9532f3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5390262771003194461, guid: 05969af2937930f4192a693be9532f3b, type: 3}
+      propertyPath: DashDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8957439237201385148, guid: 05969af2937930f4192a693be9532f3b, type: 3}
       propertyPath: m_Name
