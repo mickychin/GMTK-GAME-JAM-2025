@@ -57,7 +57,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] private AudioClip dieSFX;
     [SerializeField] private AudioClip swordSFX;
     [SerializeField] private AudioClip blockSFX;
-    
+    [SerializeField] private AudioClip executeSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +70,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
         InstantiateHealthBar();
         InstantiateStanceBar();
+        audioSourcee = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -88,6 +90,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     {
         if (isStance_Break)
         {
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(executeSFX, 1f);
             Die();
         }
 
@@ -130,6 +134,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     public void GotBlocked(float BlockKB)
     {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(blockSFX, 1f);
+
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
 
         Stance -= attackDamage;
@@ -173,6 +180,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(swordSFX, 1f);
     }
 
     private  void Die()

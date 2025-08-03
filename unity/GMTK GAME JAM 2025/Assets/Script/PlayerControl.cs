@@ -272,8 +272,6 @@ public class PlayerControl : MonoBehaviour
             {
                 // its an enemy, the enemy take damage!
                 idamagable.Damage(damageAmount);
-                audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
-                audioSourcee.PlayOneShot(hitSFX, 1f);
             }
         }
     }
@@ -286,6 +284,7 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("HIt");
             if (isStanceBreak)
             {
+                FindObjectOfType<GameMaster>().Die();
                 Die();
             }
 
