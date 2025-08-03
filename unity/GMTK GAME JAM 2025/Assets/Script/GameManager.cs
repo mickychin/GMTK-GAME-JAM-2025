@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public int Player_HP;
 
+    public int CurrentLV;
+
     private void Awake()
     {
         if (FindObjectsOfType<GameManager>().Length >= 2)
