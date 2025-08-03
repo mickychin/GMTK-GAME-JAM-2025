@@ -100,7 +100,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     public void Walk()
     {
-        if (isDashing)
+        if (isDashing || isStance_Break)
         {
             return;
         }
@@ -169,7 +169,7 @@ public class Boss : MonoBehaviour, IDamagable
             return;
         }
         currentHealth -= damageAmount;
-        //animator.SetTrigger("Get_Hit");
+        animator.SetTrigger("Get_Hit");
         Debug.Log("DAMAGE TAKEN");
 
         if (instantiatedHealthBar != null)

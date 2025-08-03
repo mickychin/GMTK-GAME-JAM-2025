@@ -89,6 +89,8 @@ AnimationClip:
       value: {fileID: 21300000, guid: 2fd1e54d89b3b3948afc86cd47ba25ff, type: 3}
     - time: 1.1666666
       value: {fileID: 21300000, guid: 070ca1d7c23fa8d4ca9bd03f9f9204fd, type: 3}
+    - time: 1.25
+      value: {fileID: 21300000, guid: 070ca1d7c23fa8d4ca9bd03f9f9204fd, type: 3}
     attribute: m_Sprite
     path: Enemy Sprite
     classID: 212
@@ -135,12 +137,13 @@ AnimationClip:
     - {fileID: 21300000, guid: a0bd2414946b3794e9eb946c24bb5262, type: 3}
     - {fileID: 21300000, guid: 2fd1e54d89b3b3948afc86cd47ba25ff, type: 3}
     - {fileID: 21300000, guid: 070ca1d7c23fa8d4ca9bd03f9f9204fd, type: 3}
+    - {fileID: 21300000, guid: 070ca1d7c23fa8d4ca9bd03f9f9204fd, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1833333
+    m_StopTime: 1.2666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -213,14 +216,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
+  - time: 1.25
     functionName: AttackPattern
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
+  - time: 1.25
     functionName: IsNotDashing
     data: 
     objectReferenceParameter: {fileID: 0}
