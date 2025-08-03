@@ -30,5 +30,11 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    public void GotoBossFight()
+    {
+        StartCoroutine(LoadLevel(7));
+        //SceneManager.LoadScene(2);
+    }
+
 
 } 
