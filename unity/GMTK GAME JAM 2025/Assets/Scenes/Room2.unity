@@ -6119,7 +6119,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35494852, y: 0.04291451, z: -10}
+  m_LocalPosition: {x: 0.98634624, y: 0.04923141, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6539,18 +6539,18 @@ MonoBehaviour:
   MaxHealth: 0
   Width: 500
   Height: 50
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 286523946}
   healthBarSmoothingSpeed: 10
   Stance: 0
   MaxStance: 0
   Swidth: 800
   Sheight: 50
-  stanceBar: {fileID: 0}
+  stanceBar: {fileID: 919639073}
   stanceBarSmoothingSpeed: 10
-  SBARObj: {fileID: 0}
-  transition: {fileID: 0}
-  DeathScreen: {fileID: 0}
-  MainDeathTxt: {fileID: 0}
+  SBARObj: {fileID: 286905067}
+  transition: {fileID: 4242904081087648623}
+  DeathScreen: {fileID: 285738901}
+  MainDeathTxt: {fileID: 125211086}
   MainDeathMessages:
   - YOU DIED
   - You got cooked
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   - Try Harder
   - D E A T H
   - Death upon thee
-  SubDeathTxt: {fileID: 0}
+  SubDeathTxt: {fileID: 660634131}
   SubDeathMessages:
   - You got major skill issue fr :3
   - Omg so bad
@@ -7512,6 +7512,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a19cfbe661ff1b842827e02c71640ad6, type: 3}
+--- !u!95 &4242904081087648623 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2598107505778191747, guid: a19cfbe661ff1b842827e02c71640ad6, type: 3}
+  m_PrefabInstance: {fileID: 4242904081087648622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5629322298757455898 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 838368477437964644, guid: be63fe1b1ed092b43a2e651a84ecd554, type: 3}
