@@ -6,7 +6,7 @@ using static UnityEngine.Random;
 
 public class Gateway : MonoBehaviour
 {
-    private GameMaster gameMaster;
+    private GameManager gameMaster;
     public int PlayerLayer = 8;
 
     private int randomSceneIndex; 
@@ -18,19 +18,26 @@ public class Gateway : MonoBehaviour
 
     public int Enemies_N;
 
+    public int BossRoom;
+
     void OnTriggerEnter2D(Collider2D collideee)
     {
         if(collideee.gameObject.layer == PlayerLayer)
         {
             randomSceneIndex = UnityEngine.Random.Range(minSceneIndex, maxSceneIndex);
-            gameMaster.level = gameMaster.level + 1f;
+            gameMaster.CurrentLV = gameMaster.CurrentLV + 1;
             SceneManager.LoadScene(randomSceneIndex);
+        }
+
+        if(gameMaster.CurrentLV > 5)
+        {
+            SceneManager.LoadScene(BossRoom);
         }
     }
 
     private void Start()
     {
-        gameMaster = FindObjectOfType<GameMaster>();
+        gameMaster = FindObjectOfType<GameManager>();
         Enemies_N += FindObjectsOfType<GunEnemy>().Length;
         Enemies_N += FindObjectsOfType<SwordmenEnemy>().Length;
     }

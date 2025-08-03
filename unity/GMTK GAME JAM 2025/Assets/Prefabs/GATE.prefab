@@ -144,12 +144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea0d660ae7e5064fb1f461dabcc80b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMaster: {fileID: 0}
   PlayerLayer: 8
-  minSceneIndex: 2
-  maxSceneIndex: 2
+  minSceneIndex: 3
+  maxSceneIndex: 6
   Wowwyveryrandomfloatverycoolfrfrfrfr: 0
   Enemies_N: 0
+  BossRoom: 7
 --- !u!50 &2179974218088776368
 Rigidbody2D:
   serializedVersion: 4
