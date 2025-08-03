@@ -25,6 +25,7 @@ public class Boss : MonoBehaviour, IDamagable
     private bool isFallingImpale;
 
     [SerializeField] private GameObject GetHit_Particle;
+    [SerializeField] private GameObject Execute_Particle;
 
     private PlayerControl playerControl;
     [SerializeField] private float attackRange;
@@ -127,6 +128,7 @@ public class Boss : MonoBehaviour, IDamagable
 
         if (isStance_Break)
         {
+            Instantiate(Execute_Particle, transform.position, Quaternion.identity);
             float Staggered_Damage = 100f;
             currentHealth -= Staggered_Damage;
             isStance_Break = false;
