@@ -24,17 +24,16 @@ public class Gateway : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collideee)
     {
-
-        FindObjectOfType<PlayerControl>().Heal(HealAmount);
         
         if(collideee.gameObject.layer == PlayerLayer)
         {
+            Heal(HealAmount);
             randomSceneIndex = UnityEngine.Random.Range(minSceneIndex, maxSceneIndex);
-            gameMaster.CurrentLV = gameMaster.CurrentLV + 1;
+            FindObjectOfType<GameManager>().CurrentLV = gameMaster.CurrentLV + 1;
             SceneManager.LoadScene(randomSceneIndex);
         }
 
-        if(gameMaster.CurrentLV > 5)
+        if(FindObjectOfType<GameManager>().CurrentLV > 5)
         {
             SceneManager.LoadScene(BossRoom);
         }
@@ -42,7 +41,6 @@ public class Gateway : MonoBehaviour
 
     private void Start()
     {
-        gameMaster = FindObjectOfType<GameManager>();
         Enemies_N += FindObjectsOfType<GunEnemy>().Length;
         Enemies_N += FindObjectsOfType<SwordmenEnemy>().Length;
     }
@@ -56,5 +54,10 @@ public class Gateway : MonoBehaviour
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<SpriteRenderer>().color = Color.white;
         }
+    }
+
+    public void Heal(int healAmount)
+    {
+        FindObjectOfType<GameManager>().Player_HP += healAmount;
     }
 }

@@ -340,16 +340,6 @@ public class PlayerControl : MonoBehaviour
         isAttacking = true; // same as above
     }
 
-    public void Heal(int HealAmount)
-    {
-        currentHP = currentHP + HealAmount;
-        Debug.Log(currentHP);
-        if(currentHP > 100)
-        {
-            currentHP = 100;
-        }
-    }
-
     public bool IsParryContact()
     {
         Vector2 dir = ParryPos_2.position - ParryPos_1.position;
