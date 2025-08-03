@@ -102,8 +102,7 @@ public class GameMaster : MonoBehaviour
 
     public void BossSlain()
     {
-        WinScreen.SetActive(true);
-        StartCoroutine(GotoMainMenu());
+        StartCoroutine(waitAbit());
     }
 
     IEnumerator GotoMainMenu()
@@ -115,5 +114,12 @@ public class GameMaster : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         SceneManager.LoadScene(0);
+    }
+
+    IEnumerator waitAbit()
+    {
+        yield return new WaitForSeconds(3);
+        WinScreen.SetActive(true);
+        StartCoroutine(GotoMainMenu());
     }
 }

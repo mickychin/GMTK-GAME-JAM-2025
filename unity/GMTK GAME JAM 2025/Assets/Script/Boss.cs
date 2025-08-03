@@ -115,7 +115,7 @@ public class Boss : MonoBehaviour, IDamagable
     {
         if (isStance_Break)
         {
-            currentHealth -= 100;
+            currentHealth -= 150;
             isStance_Break = false;
             Stance = MaxStance;
             if (instantiatedStanceBar != null)
