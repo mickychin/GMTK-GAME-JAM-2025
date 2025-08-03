@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Random;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -66,12 +67,26 @@ public class PlayerControl : MonoBehaviour
 
     private GameManager gameManager;
 
+    private AudioSource audioSourcee;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip parrySFX;
+    [SerializeField] private AudioClip rollSFX;
+    [SerializeField] private AudioClip landSFX;
+    [SerializeField] private AudioClip walkSFX;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip attackSFX;
+    [SerializeField] private AudioClip hitSFX;
+    [SerializeField] private AudioClip blockSFX;
+
+
     private void Start()
     {
         Stance = MaxStance;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         StartCoroutine(LateStart());
+        audioSourcee = GetComponent<AudioSource>();
     }
 
     IEnumerator LateStart()
@@ -108,6 +123,8 @@ public class PlayerControl : MonoBehaviour
         {
             
             animator.SetTrigger("Jump");
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(jumpSFX, 1f);
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
             coyoteTimeCounter = 0f;
@@ -166,6 +183,8 @@ public class PlayerControl : MonoBehaviour
         if (MathF.Abs(rb.velocity.x) > minSpeedForRunAnim)
         {
             animator.SetBool("Run", true);
+            // audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            // audioSourcee.PlayOneShot(walkSFX, 0.3f);
         }
         else
         {
@@ -225,6 +244,8 @@ public class PlayerControl : MonoBehaviour
         {
             //dodge roll
             animator.SetTrigger("Dodge");
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(rollSFX, 0.5f);
             isRolling = true;
             if (isFacingRight)
             {
@@ -239,6 +260,8 @@ public class PlayerControl : MonoBehaviour
 
     private void Attack()
     {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9F,1.1f);
+        audioSourcee.PlayOneShot(attackSFX, 0.65f);
         //rb.velocity = new Vector2();
         hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0f, attackableLayer);
 
@@ -250,6 +273,8 @@ public class PlayerControl : MonoBehaviour
             {
                 // its an enemy, the enemy take damage!
                 idamagable.Damage(damageAmount);
+                audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+                audioSourcee.PlayOneShot(hitSFX, 1f);
             }
         }
     }
@@ -270,6 +295,8 @@ public class PlayerControl : MonoBehaviour
                 //PARRY
                 CancelEveryAnim();
                 //animator.SetTrigger("Parry_fr");
+                audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+                audioSourcee.PlayOneShot(parrySFX, 1f);
                 Debug.Log("PARRY");
                 CanParry = 1f;
                 Stance = Stance + 15f;
@@ -289,6 +316,8 @@ public class PlayerControl : MonoBehaviour
             if (IsParrying)
             {
                 //block and lose stance
+                audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+                audioSourcee.PlayOneShot(blockSFX, 1f);
                 Stance -= collision.GetComponent<DamagePlayer>().Damage;
                 CheckStanceBreak();
                 bulletDetection(collision.gameObject);
