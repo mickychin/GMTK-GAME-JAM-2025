@@ -139,6 +139,16 @@ public class Boss : MonoBehaviour, IDamagable
                 instantiatedHealthBar.UpdateHealthBar(currentHealth, maxHealth);
             }
         }
+        if (isParry())
+        {
+            animator.SetBool("IsParry", true);
+            animator.SetTrigger("Hit");
+            return;
+        }
+        else
+        {
+            animator.SetBool("IsParry", false);
+        }
 
         isAttacking = false;
         currentCombo = 0;
@@ -206,6 +216,18 @@ public class Boss : MonoBehaviour, IDamagable
     private bool isBLock() //theres a chance of blocking after getting hit and not
     {
         if(Random.Range(1, 101) > 10) //90 percent to block
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private bool isParry() //theres a chance of blocking after getting hit and not
+    {
+        if (Random.Range(1, 101) > 80) //90 percent to parry
         {
             return true;
         }
