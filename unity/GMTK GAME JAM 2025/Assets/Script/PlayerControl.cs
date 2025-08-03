@@ -78,6 +78,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private AudioClip attackSFX;
     [SerializeField] private AudioClip hitSFX;
     [SerializeField] private AudioClip blockSFX;
+    [SerializeField] private AudioClip hurtSFX;
 
 
     private void Start()
@@ -123,8 +124,6 @@ public class PlayerControl : MonoBehaviour
         {
             
             animator.SetTrigger("Jump");
-            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
-            audioSourcee.PlayOneShot(jumpSFX, 1f);
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
             coyoteTimeCounter = 0f;
@@ -325,6 +324,8 @@ public class PlayerControl : MonoBehaviour
             }
 
             //TAKE DAMAGE
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            audioSourcee.PlayOneShot(hurtSFX, 1f);
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
             FindObjectOfType<GameManager>().Player_HP = currentHP;
             animator.SetTrigger("Damage");

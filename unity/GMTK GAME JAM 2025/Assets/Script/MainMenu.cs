@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        FindObjectOfType<PlayMusic>().playBattleMusic();
+
         StartCoroutine(LoadLevel(2));
         //SceneManager.LoadScene(2);
     }
@@ -32,6 +34,8 @@ public class MainMenu : MonoBehaviour
 
     public void GotoBossFight()
     {
+        FindObjectOfType<PlayMusic>().playBossMusic();
+
         StartCoroutine(LoadLevel(8));
         //SceneManager.LoadScene(2);
     }

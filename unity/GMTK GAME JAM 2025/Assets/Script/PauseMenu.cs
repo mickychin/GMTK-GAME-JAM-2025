@@ -42,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturntoMenu()
     {
+        FindObjectOfType<PlayMusic>().playMainMusic();
         SceneManager.LoadScene(0);
     }
 }

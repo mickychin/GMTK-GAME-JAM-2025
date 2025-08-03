@@ -233,12 +233,13 @@ MonoBehaviour:
   hit_effect: {fileID: 1729181863730008220, guid: 4173a979d50a17347995d2f1593576f6, type: 3}
   parrySFX: {fileID: 8300000, guid: fe036c7bb573e7e4f913fbba2d8db75c, type: 3}
   rollSFX: {fileID: 8300000, guid: 749b8cec3785ef44789a9385a1834fc8, type: 3}
-  landSFX: {fileID: 8300000, guid: ad4ebaefbcde75a4baad8c7cb38068c3, type: 3}
-  walkSFX: {fileID: 8300000, guid: ad4ebaefbcde75a4baad8c7cb38068c3, type: 3}
-  jumpSFX: {fileID: 8300000, guid: bd06ed05c7bf5014597b7c52e984d4f2, type: 3}
+  landSFX: {fileID: 0}
+  walkSFX: {fileID: 0}
+  jumpSFX: {fileID: 0}
   attackSFX: {fileID: 8300000, guid: 831997023f2fe314f9506e205b4c101d, type: 3}
   hitSFX: {fileID: 8300000, guid: 0c280593680cc0640bb781399859cff5, type: 3}
   blockSFX: {fileID: 8300000, guid: 475c9990ad4157443a7543b994321a41, type: 3}
+  hurtSFX: {fileID: 8300000, guid: e7805d8ffe68cf64e9361dec8def8305, type: 3}
 --- !u!95 &222412167833007697
 Animator:
   serializedVersion: 5
