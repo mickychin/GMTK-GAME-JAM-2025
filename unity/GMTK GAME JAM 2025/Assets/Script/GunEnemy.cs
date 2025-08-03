@@ -242,7 +242,7 @@ public class GunEnemy : MonoBehaviour, IDamagable
 
     private void Patrol()
     {
-        if (!canSeePlayer)
+        if (!canSeePlayer && !isAttacking)
         {
             rb.velocity = new Vector2(speed * transform.localScale.x, rb.velocity.y);
         }
@@ -316,7 +316,7 @@ public class GunEnemy : MonoBehaviour, IDamagable
         Vector2 playerPos = playerControl.transform.position - transform.position;
         Vector2 ShootDirect;
         float bulletAngle;
-        if (playerPos.x > 0)
+        if (transform.localScale.x > 0)
         {
             ShootDirect = Vector2.right;
             bulletAngle = 0f;
