@@ -52,6 +52,12 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] private GameObject StanceBarUI;
     private EnemyStance instantiatedStanceBar;
 
+    private AudioSource audioSourcee;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip dieSFX;
+    [SerializeField] private AudioClip swordSFX;
+    [SerializeField] private AudioClip blockSFX;
+    
     // Start is called before the first frame update
     void Start()
     {
