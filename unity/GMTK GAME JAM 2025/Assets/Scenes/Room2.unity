@@ -6578,6 +6578,7 @@ MonoBehaviour:
   - Thou art a fool
   - Death comes for us all
   - If you win, I'll sit on your face ~
+  WinScreen: {fileID: 0}
 --- !u!1 &1503489926
 GameObject:
   m_ObjectHideFlags: 0
@@ -7660,6 +7661,7 @@ MonoBehaviour:
   bulletPrefabs: {fileID: 44078381102393576, guid: aa176bf3e52a7f747ad89b963c5f0908, type: 3}
   bulletForce: 5
   firePoint: {fileID: 80783044}
+  Hit_particle: {fileID: 1612197673494161886, guid: 16e0533c8499e8d4b84215791621cbd6, type: 3}
   playersLayer: 8
   EyeSightRange: 15
   ThingEnemyCanSee:

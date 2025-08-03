@@ -21,6 +21,7 @@ public class GunEnemy : MonoBehaviour, IDamagable
     [SerializeField] GameObject bulletPrefabs;
     [SerializeField] float bulletForce;
     [SerializeField] Transform firePoint;
+    [SerializeField] GameObject Hit_particle;
     private bool isAttacking;
 
     [Header("Player Detection")]
@@ -87,6 +88,7 @@ public class GunEnemy : MonoBehaviour, IDamagable
             Die();
         }
 
+        Instantiate(Hit_particle, transform.position, Quaternion.identity);
         currentCombo = 0;
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);
