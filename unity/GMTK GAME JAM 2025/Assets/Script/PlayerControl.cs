@@ -284,6 +284,7 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("HIt");
             if (isStanceBreak)
             {
+                FindObjectOfType<GameMaster>().Die();
                 Die();
             }
 

@@ -751,8 +751,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410.6609, y: -89.70618}
-  m_SizeDelta: {x: 772.8671, y: 126.4026}
+  m_AnchoredPosition: {x: 552.59753, y: -89.70618}
+  m_SizeDelta: {x: 1056.7402, y: 126.4026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713825740
 MonoBehaviour:
@@ -787,7 +787,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Game Title
+  m_Text: 'Neko Overdrive
 
 '
 --- !u!222 &713825741
