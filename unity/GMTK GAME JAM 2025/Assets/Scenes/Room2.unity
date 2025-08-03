@@ -6098,7 +6098,7 @@ Transform:
   m_GameObject: {fileID: 1235123248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35494852, y: 0.04291451, z: -10}
+  m_LocalPosition: {x: 0.98634624, y: 0.04923141, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7653,7 +7653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  Corspe: {fileID: 5522587570237296691, guid: 88f102369956c7a47bd783dff0cdbd2e, type: 3}
+  Corspe: {fileID: 7206740084121641414, guid: 0e56e5d7978450b4d8a69b2bb716672a, type: 3}
   DashDistance: 0
   JumpHeight: 0
   jumpAttackDashDistance: 0
