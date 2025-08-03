@@ -84,6 +84,7 @@ public class GameMaster : MonoBehaviour
 
     public void Die()
     {
+        FindObjectOfType<PlayMusic>().playMainMusic();
         FindObjectOfType<GameManager>().Player_HP = (int)MaxHealth;
         FindObjectOfType<GameManager>().CurrentLV = 0;
 
