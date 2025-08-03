@@ -24,6 +24,8 @@ public class Boss : MonoBehaviour, IDamagable
     private float Ground_Y;
     private bool isFallingImpale;
 
+    [SerializeField] private GameObject GetHit_Particle;
+
     private PlayerControl playerControl;
     [SerializeField] private float attackRange;
     [SerializeField] private float speed;
@@ -150,6 +152,7 @@ public class Boss : MonoBehaviour, IDamagable
             animator.SetBool("IsParry", false);
         }
 
+        Instantiate(GetHit_Particle, transform.position, Quaternion.identity);
         isAttacking = false;
         currentCombo = 0;
         isBlocking = isBLock();
