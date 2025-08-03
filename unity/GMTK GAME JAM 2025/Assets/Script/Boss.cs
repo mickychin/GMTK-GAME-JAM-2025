@@ -264,7 +264,9 @@ public class Boss : MonoBehaviour, IDamagable
         }
         float BossDeathAnimation = 1f;
         animator.SetTrigger("dead");
+        FindObjectOfType<GameMaster>().BossSlain();
         Destroy(gameObject, BossDeathAnimation);
+        
     }
 
     private void AttackPattern()

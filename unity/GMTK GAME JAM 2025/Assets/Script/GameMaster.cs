@@ -25,12 +25,15 @@ public class GameMaster : MonoBehaviour
     public Animator transition;
 
     [Header("Death Screen")]
-    private bool IsDead = false;
     public GameObject DeathScreen;
     public Text MainDeathTxt;
     public string[] MainDeathMessages;
     public Text SubDeathTxt; 
     public string[] SubDeathMessages;
+    private bool IsDead = false;
+
+    [Header("BossKill Screen")]
+    public GameObject WinScreen;
    
 
     void Start()
@@ -95,6 +98,12 @@ public class GameMaster : MonoBehaviour
             DeathScreen.SetActive(true);
             StartCoroutine(GotoMainMenu());
         }
+    }
+
+    public void BossSlain()
+    {
+        WinScreen.SetActive(true);
+        StartCoroutine(GotoMainMenu());
     }
 
     IEnumerator GotoMainMenu()
