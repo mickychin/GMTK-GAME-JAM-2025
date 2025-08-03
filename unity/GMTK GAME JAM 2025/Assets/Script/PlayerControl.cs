@@ -62,6 +62,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform Parry_Pos;
     [SerializeField] private GameObject ParryEffect_Photon_Edi;
 
+    [SerializeField] private GameObject hit_effect;
+
     private GameManager gameManager;
 
     private void Start()
@@ -280,6 +282,9 @@ public class PlayerControl : MonoBehaviour
                 bulletDetection(collision.gameObject);
                 return;
             }
+
+            // not parry
+            Instantiate(hit_effect, transform.position, Quaternion.identity);
 
             if (IsParrying)
             {

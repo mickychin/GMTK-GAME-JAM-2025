@@ -229,6 +229,7 @@ MonoBehaviour:
   ParryEffect: {fileID: 9177868642122428478, guid: 4d9167b53af040045a044d799f2b6550, type: 3}
   Parry_Pos: {fileID: 1125735176974517912}
   ParryEffect_Photon_Edi: {fileID: 6875808924795854741, guid: a92fc555b25c4fc43ae35d91f2e5ff07, type: 3}
+  hit_effect: {fileID: 1729181863730008220, guid: 4173a979d50a17347995d2f1593576f6, type: 3}
 --- !u!95 &222412167833007697
 Animator:
   serializedVersion: 5
