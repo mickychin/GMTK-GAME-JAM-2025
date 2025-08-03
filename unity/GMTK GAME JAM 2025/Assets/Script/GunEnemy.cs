@@ -90,6 +90,7 @@ public class GunEnemy : MonoBehaviour, IDamagable
         currentCombo = 0;
         isBlocking = isBLock();
         animator.SetBool("Block", isBlocking);
+        //animator.SetTrigger("Get_Hit");
         if (isBlocking)
         {
             Stance -= damageAmount;
@@ -102,8 +103,13 @@ public class GunEnemy : MonoBehaviour, IDamagable
             if (Stance <= 0)
             {
                 //staggered
+                Debug.Log("BREAK");
                 animator.SetTrigger("Stance_Break");
                 isStance_Break = true;
+            }
+            else
+            {
+                animator.SetTrigger("Get_Hit");
             }
             return;
         }
