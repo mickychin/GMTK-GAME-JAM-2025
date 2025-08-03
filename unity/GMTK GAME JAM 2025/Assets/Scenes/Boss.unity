@@ -13940,6 +13940,7 @@ MonoBehaviour:
   bulletForce: 8
   ImpaleDropRate: 10
   GetHit_Particle: {fileID: 1612197673494161886, guid: 16e0533c8499e8d4b84215791621cbd6, type: 3}
+  Execute_Particle: {fileID: 6536869132313143562, guid: dd0fc57863302ca46aa1fab190812e85, type: 3}
   attackRange: 1
   speed: 5
   MaxStance: 150
