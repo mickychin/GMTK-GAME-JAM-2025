@@ -55,6 +55,18 @@ public class Boss : MonoBehaviour, IDamagable
     [SerializeField] private GameObject StanceBarUI;
     private EnemyStance instantiatedStanceBar;
 
+    private AudioSource audioSourcee;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip dieSFX;
+    [SerializeField] private AudioClip swordSFX;
+    [SerializeField] private AudioClip blockSFX;
+    [SerializeField] private AudioClip parrySFX;
+    [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private AudioClip dashSFX;
+    [SerializeField] private AudioClip heavyhitSFX;
+    [SerializeField] private AudioClip impaleSFX;
+    
+
      //Add 75 & 675 
 
     // Start is called before the first frame update
@@ -68,6 +80,7 @@ public class Boss : MonoBehaviour, IDamagable
 
         InstantiateHealthBar();
         InstantiateStanceBar();
+        audioSourcee = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -129,6 +142,8 @@ public class Boss : MonoBehaviour, IDamagable
         if (isStance_Break)
         {
             Instantiate(Execute_Particle, transform.position, Quaternion.identity);
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(heavyhitSFX, 1f);
             float Staggered_Damage = 100f;
             currentHealth -= Staggered_Damage;
             isStance_Break = false;
@@ -147,6 +162,8 @@ public class Boss : MonoBehaviour, IDamagable
         {
             animator.SetBool("IsParry", true);
             animator.SetTrigger("Hit");
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(parrySFX, 1f);
             return;
         }
         else
@@ -201,6 +218,9 @@ public class Boss : MonoBehaviour, IDamagable
 
     public void GotBlocked(float BlockKB)
     {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(blockSFX, 1f);
+        
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
 
         Stance -= attackDamage;
@@ -258,6 +278,8 @@ public class Boss : MonoBehaviour, IDamagable
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(swordSFX, 1f);
     }
 
     private void Shoot()
@@ -277,6 +299,8 @@ public class Boss : MonoBehaviour, IDamagable
         bullet.transform.localEulerAngles = firePoint.transform.localEulerAngles * transform.localScale.x;
         Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
         bullet_rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(shootSFX, 0.5f);
     }
 
     private void ShootHorizontal()
@@ -299,6 +323,8 @@ public class Boss : MonoBehaviour, IDamagable
         Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
         bullet_rb.rotation = bulletAngle;
         bullet_rb.AddForce(ShootDirect * bulletForce, ForceMode2D.Impulse);
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(shootSFX, 0.5f);
     }
 
     private  void Die()
@@ -306,6 +332,8 @@ public class Boss : MonoBehaviour, IDamagable
         if(!IsDead)
         {
             IsDead = true;
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(dieSFX, 0.5f);
             if (instantiatedHealthBar != null)
             {
             Destroy(instantiatedHealthBar.gameObject);
@@ -369,6 +397,8 @@ public class Boss : MonoBehaviour, IDamagable
         transform.position = new Vector2(transform.position.x, transform.position.y + JumpHeight);
         Gravity_Scale = rb.gravityScale;
         rb.gravityScale = 0;
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(dashSFX, 0.5f);
     }
 
     private void Fall_Impale()
@@ -442,5 +472,17 @@ public class Boss : MonoBehaviour, IDamagable
         {
             Destroy(instantiatedStanceBar.gameObject);
         }
+    }
+
+    public void ImpaleSound()
+    {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(impaleSFX, 0.5f);
+    }
+
+    public void DashSound()
+    {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(dashSFX, 0.5f);
     }
 }
