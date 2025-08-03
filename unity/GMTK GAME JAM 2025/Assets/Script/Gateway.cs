@@ -59,6 +59,6 @@ public class Gateway : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        FindObjectOfType<GameManager>().Player_HP += healAmount;
+        FindObjectOfType<GameManager>().Player_HP = Mathf.Min(FindObjectOfType<GameManager>().Player_HP + healAmount, FindObjectOfType<PlayerControl>().maxHP);
     }
 }
