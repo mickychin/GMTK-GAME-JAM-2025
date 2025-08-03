@@ -60,10 +60,13 @@ public class PlayerControl : MonoBehaviour
     private bool isStanceBreak;
     [SerializeField] private GameObject ParryEffect;
 
+    private GameManager gameManager;
+
     private void Start()
     {
         Stance = MaxStance;
-        currentHP = maxHP;
+        gameManager = FindObjectOfType<GameManager>();
+        currentHP = gameManager.Player_HP;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -279,6 +282,7 @@ public class PlayerControl : MonoBehaviour
 
             //TAKE DAMAGE
             currentHP -= collision.GetComponent<DamagePlayer>().Damage;
+            gameManager.Player_HP = currentHP;
             animator.SetTrigger("Damage");
             CancelEveryAnim();
             //animator.SetTrigger("Damage");
