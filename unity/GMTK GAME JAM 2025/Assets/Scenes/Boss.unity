@@ -13702,7 +13702,7 @@ MonoBehaviour:
   attackDamage: 10
   bulletPrefabs: {fileID: 44078381102393576, guid: aa176bf3e52a7f747ad89b963c5f0908, type: 3}
   firePoint: {fileID: 200281843}
-  bulletForce: 3
+  bulletForce: 8
   ImpaleDropRate: 10
   attackRange: 1
   speed: 5
