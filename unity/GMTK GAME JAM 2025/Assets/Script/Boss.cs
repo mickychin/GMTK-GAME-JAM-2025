@@ -80,8 +80,16 @@ public class Boss : MonoBehaviour, IDamagable
     {
         float X_Distance = playerControl.transform.position.x - transform.position.x;
         float dir = X_Distance / Mathf.Abs(X_Distance);
-        transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y);
-        rb.velocity = new Vector2(dir * speed, rb.velocity.y);
+        float X_Distance_for_boss_to_turn = 0.1f;
+        if(Mathf.Abs(X_Distance) > X_Distance_for_boss_to_turn) //this fix the issue where boss seem to be glitching when its directly on top of player while flying.
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y);
+            rb.velocity = new Vector2(dir * speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+        }
     }
 
     public void Damage(float damageAmount)
