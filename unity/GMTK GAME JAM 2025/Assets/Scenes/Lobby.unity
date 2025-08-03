@@ -12490,11 +12490,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerLayer: 8
   minSceneIndex: 3
-  maxSceneIndex: 7
+  maxSceneIndex: 6
   Wowwyveryrandomfloatverycoolfrfrfrfr: 0
   Enemies_N: 0
-  BossRoom: 8
-  HealAmount: 0
+  BossRoom: 7
 --- !u!61 &1641990452
 BoxCollider2D:
   m_ObjectHideFlags: 0
