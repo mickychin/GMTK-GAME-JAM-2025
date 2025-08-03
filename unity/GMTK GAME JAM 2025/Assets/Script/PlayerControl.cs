@@ -60,6 +60,7 @@ public class PlayerControl : MonoBehaviour
     private bool isStanceBreak;
     [SerializeField] private GameObject ParryEffect;
     [SerializeField] private Transform Parry_Pos;
+    [SerializeField] private GameObject ParryEffect_Photon_Edi;
 
     private GameManager gameManager;
 
@@ -142,6 +143,7 @@ public class PlayerControl : MonoBehaviour
         {
             //parry
             Parry = ParryTime;
+            animator.SetTrigger("Parry_fr");
         }
         if (Input.GetMouseButtonUp(1))
         {
@@ -259,11 +261,12 @@ public class PlayerControl : MonoBehaviour
             {
                 //PARRY
                 CancelEveryAnim();
-                animator.SetTrigger("Parry_fr");
+                //animator.SetTrigger("Parry_fr");
                 Debug.Log("PARRY");
                 CanParry = 1f;
                 Stance = Stance + 15f;
                 GameObject ParryVFX = Instantiate(ParryEffect, Parry_Pos.transform.position, Quaternion.identity);
+                Instantiate(ParryEffect_Photon_Edi, transform.position + ParryEffect_Photon_Edi.transform.position, Quaternion.identity, transform);
                 if (!collision.CompareTag("Bullet"))
                 {
                     collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);
