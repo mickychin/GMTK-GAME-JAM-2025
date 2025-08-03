@@ -16,6 +16,8 @@ public class Gateway : MonoBehaviour
     
     public int Wowwyveryrandomfloatverycoolfrfrfrfr;
 
+    public int Enemies_N;
+
     void OnTriggerEnter2D(Collider2D collideee)
     {
         if(collideee.gameObject.layer == PlayerLayer)
@@ -26,4 +28,20 @@ public class Gateway : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Enemies_N += FindObjectsOfType<GunEnemy>().Length;
+        Enemies_N += FindObjectsOfType<SwordmenEnemy>().Length;
+    }
+
+    public void Enemy_Die()
+    {
+        Enemies_N--;
+
+        if(Enemies_N <= 0)
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
 }
