@@ -55,6 +55,13 @@ public class GunEnemy : MonoBehaviour, IDamagable
     [SerializeField] private GameObject StanceBarUI;
     private EnemyStance instantiatedStanceBar;
 
+    private AudioSource audioSourcee;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip dieSFX;
+    [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private AudioClip blockSFX;
+    [SerializeField] private AudioClip executeSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +73,8 @@ public class GunEnemy : MonoBehaviour, IDamagable
 
         InstantiateHealthBar();
         InstantiateStanceBar();
+        audioSourcee = GetComponent<AudioSource>();
+
     }
 
     private void Update()
@@ -85,6 +94,8 @@ public class GunEnemy : MonoBehaviour, IDamagable
     {
         if (isStance_Break)
         {
+            audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+            audioSourcee.PlayOneShot(executeSFX, 1f);
             Die();
         }
 
@@ -135,6 +146,8 @@ public class GunEnemy : MonoBehaviour, IDamagable
 
     public void GotBlocked(float BlockKB)
     {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(blockSFX, 1f);
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
 
         Stance -= attackDamage;
@@ -178,6 +191,7 @@ public class GunEnemy : MonoBehaviour, IDamagable
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
+
     }
 
     private void Die()
@@ -197,6 +211,8 @@ public class GunEnemy : MonoBehaviour, IDamagable
             GameObject EnemyCorspe = Instantiate(Corspe, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(dieSFX, 1f);
     }
 
     private void AttackPattern()
@@ -317,6 +333,8 @@ public class GunEnemy : MonoBehaviour, IDamagable
 
     private void ShootHorizontal()
     {
+        audioSourcee.pitch = UnityEngine.Random.Range(0.9f,1.1f);
+        audioSourcee.PlayOneShot(shootSFX, 0.3f);
         Vector2 playerPos = playerControl.transform.position - transform.position;
         Vector2 ShootDirect;
         float bulletAngle;
