@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
 
     public void GotoBossFight()
     {
-        StartCoroutine(LoadLevel(7));
+        StartCoroutine(LoadLevel(8));
         //SceneManager.LoadScene(2);
     }
 
