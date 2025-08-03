@@ -5519,38 +5519,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GATE
       objectReference: {fileID: 0}
-    - target: {fileID: 588047049664649455, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2177167580477496717, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593268411390305664, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593268411390305664, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593268411390305664, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593268411390305664, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8537971776457400946, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
       propertyPath: gameMaster
       value: 
       objectReference: {fileID: 1503063539}
-    - target: {fileID: 8730745421892523399, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0302103
-      objectReference: {fileID: 0}
     - target: {fileID: 8730745421892523399, guid: 78fdc72cb7d14f441b6efcdd8c8a8756, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.5128

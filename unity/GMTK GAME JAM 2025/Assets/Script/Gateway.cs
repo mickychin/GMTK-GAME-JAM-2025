@@ -6,7 +6,7 @@ using static UnityEngine.Random;
 
 public class Gateway : MonoBehaviour
 {
-    public GameMaster gameMaster;
+    private GameMaster gameMaster;
     public int PlayerLayer = 8;
 
     private int randomSceneIndex; 
@@ -30,6 +30,7 @@ public class Gateway : MonoBehaviour
 
     private void Start()
     {
+        gameMaster = FindObjectOfType<GameMaster>();
         Enemies_N += FindObjectsOfType<GunEnemy>().Length;
         Enemies_N += FindObjectsOfType<SwordmenEnemy>().Length;
     }
