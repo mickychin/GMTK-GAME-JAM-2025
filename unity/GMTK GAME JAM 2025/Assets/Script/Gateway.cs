@@ -20,8 +20,13 @@ public class Gateway : MonoBehaviour
 
     public int BossRoom;
 
+    public int HealAmount;
+
     void OnTriggerEnter2D(Collider2D collideee)
     {
+
+        FindObjectOfType<PlayerControl>().Heal(HealAmount);
+        
         if(collideee.gameObject.layer == PlayerLayer)
         {
             randomSceneIndex = UnityEngine.Random.Range(minSceneIndex, maxSceneIndex);
