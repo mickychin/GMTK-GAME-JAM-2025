@@ -81,7 +81,10 @@ public class GameMaster : MonoBehaviour
 
     public void Die()
     {
-        if(IsDead == false)
+        FindObjectOfType<GameManager>().Player_HP = (int)MaxHealth;
+        FindObjectOfType<GameManager>().CurrentLV = 0;
+
+        if (IsDead == false)
         {
             IsDead = true;
             int DMR = Random.Range(0, MainDeathMessages.Length); 
