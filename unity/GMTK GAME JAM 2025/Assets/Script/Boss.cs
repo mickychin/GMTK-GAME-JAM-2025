@@ -36,6 +36,8 @@ public class Boss : MonoBehaviour, IDamagable
 
     public int currentCombo;
 
+    private bool IsDead = false;
+
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -266,19 +268,22 @@ public class Boss : MonoBehaviour, IDamagable
 
     private  void Die()
     {
-        if (instantiatedHealthBar != null)
+        if(!IsDead)
         {
+            IsDead = true;
+            if (instantiatedHealthBar != null)
+            {
             Destroy(instantiatedHealthBar.gameObject);
-        }
-        if (instantiatedStanceBar != null)
-        {
+            }
+            if (instantiatedStanceBar != null)
+            {
             Destroy(instantiatedStanceBar.gameObject);
+            }
+            float BossDeathAnimation = 1f;
+            animator.SetTrigger("dead");
+            FindObjectOfType<GameMaster>().BossSlain();
+            Destroy(gameObject, BossDeathAnimation);
         }
-        float BossDeathAnimation = 1f;
-        animator.SetTrigger("dead");
-        FindObjectOfType<GameMaster>().BossSlain();
-        Destroy(gameObject, BossDeathAnimation);
-        
     }
 
     private void AttackPattern()

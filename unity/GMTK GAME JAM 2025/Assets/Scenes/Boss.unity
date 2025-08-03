@@ -13780,7 +13780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 300
   currentHealth: 0
-  DashDistance: 15
+  DashDistance: 20
   JumpHeight: 3
   jumpAttackDashDistance: 5
   attackDamage: 10
