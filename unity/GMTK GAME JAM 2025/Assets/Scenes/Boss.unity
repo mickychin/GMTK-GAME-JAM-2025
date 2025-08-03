@@ -13955,13 +13955,13 @@ MonoBehaviour:
   HealthBarUI: {fileID: 8388068485579534967, guid: 81d9bc7ad442a624baf160c9500ed0d1, type: 3}
   StanceBarUI: {fileID: 146914836190091198, guid: 633e46ee56ed2614bb6e2797e944ff5e, type: 3}
   dieSFX: {fileID: 8300000, guid: 26b3615416eb29644b8e85a0009c44fe, type: 3}
-  swordSFX: {fileID: 8300000, guid: 831997023f2fe314f9506e205b4c101d, type: 3}
+  swordSFX: {fileID: 8300000, guid: ba462cfdc564c2d4f95ee6af4b8c73db, type: 3}
   blockSFX: {fileID: 8300000, guid: 475c9990ad4157443a7543b994321a41, type: 3}
   parrySFX: {fileID: 8300000, guid: fe036c7bb573e7e4f913fbba2d8db75c, type: 3}
   shootSFX: {fileID: 8300000, guid: 434239945a706c542be3c90bac692a9f, type: 3}
   dashSFX: {fileID: 8300000, guid: e138d46f91414d94eaa0d47e7d842bf3, type: 3}
   heavyhitSFX: {fileID: 8300000, guid: 0c280593680cc0640bb781399859cff5, type: 3}
-  impaleSFX: {fileID: 0}
+  impaleSFX: {fileID: 8300000, guid: ef2f7704d6cee8248a17564de0fad356, type: 3}
 --- !u!1 &1400561492
 GameObject:
   m_ObjectHideFlags: 0
