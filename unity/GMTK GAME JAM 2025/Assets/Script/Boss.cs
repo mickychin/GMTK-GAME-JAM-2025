@@ -40,6 +40,15 @@ public class Boss : MonoBehaviour, IDamagable
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private int[] patterns = {65}; //the attack pattern is actually read from back to front
+
+    [Header("Health Bar UI")]
+    [SerializeField] private GameObject HealthBarUI;
+    private EnemyHP instantiatedHealthBar;
+
+    [Header("Stance Bar UI")]
+    [SerializeField] private GameObject StanceBarUI;
+    private EnemyStance instantiatedStanceBar;
+
      //Add 75 & 675 
 
     // Start is called before the first frame update
@@ -50,11 +59,18 @@ public class Boss : MonoBehaviour, IDamagable
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        InstantiateHealthBar();
+        InstantiateStanceBar();
     }
 
     private void Update()
     {
         Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
+        if (instantiatedStanceBar != null)
+        {
+            instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+        }
 
         if (Vector2.Distance(transform.position, playerControl.transform.position) < attackRange)
         {
@@ -99,7 +115,13 @@ public class Boss : MonoBehaviour, IDamagable
     {
         if (isStance_Break)
         {
-            Die();
+            currentHealth -= 100;
+            isStance_Break = false;
+            Stance = MaxStance;
+            if (instantiatedStanceBar != null)
+            {
+                instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+            }
         }
 
         isAttacking = false;
@@ -111,6 +133,10 @@ public class Boss : MonoBehaviour, IDamagable
         if (isBlocking)
         {
             Stance -= damageAmount;
+            if (instantiatedStanceBar != null)
+            {
+                instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+            }
 
             if(Stance <= 0)
             {
@@ -124,6 +150,11 @@ public class Boss : MonoBehaviour, IDamagable
         //animator.SetTrigger("Get_Hit");
         Debug.Log("DAMAGE TAKEN");
 
+        if (instantiatedHealthBar != null)
+        {
+            instantiatedHealthBar.UpdateHealthBar(currentHealth, maxHealth);
+        }
+
         if(currentHealth <= 0)
         {
             //die
@@ -136,6 +167,11 @@ public class Boss : MonoBehaviour, IDamagable
         rb.velocity = new Vector2(-BlockKB * transform.localScale.x, rb.velocity.y);
 
         Stance -= attackDamage;
+
+        if (instantiatedStanceBar != null)
+        {
+            instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+        }
 
         if (Stance <= 0)
         {
@@ -173,11 +209,6 @@ public class Boss : MonoBehaviour, IDamagable
         isAttacking = true;
         //Debug.Log(AttackMoveSet);
         animator.SetInteger("Attack", AttackMoveSet);
-
-        if(AttackMoveSet == 3)
-        {
-            ShootHorizontal();
-        }
     }
 
     private void Shoot()
@@ -223,6 +254,14 @@ public class Boss : MonoBehaviour, IDamagable
 
     private  void Die()
     {
+        if (instantiatedHealthBar != null)
+        {
+            Destroy(instantiatedHealthBar.gameObject);
+        }
+        if (instantiatedStanceBar != null)
+        {
+            Destroy(instantiatedStanceBar.gameObject);
+        }
         float BossDeathAnimation = 1f;
         animator.SetTrigger("dead");
         Destroy(gameObject, BossDeathAnimation);
@@ -297,5 +336,47 @@ public class Boss : MonoBehaviour, IDamagable
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private void InstantiateHealthBar()
+    {
+        if(HealthBarUI != null)
+        {
+            GameObject healthBarObj = Instantiate(HealthBarUI);
+            instantiatedHealthBar = healthBarObj.GetComponent<EnemyHP>();
+
+            if(instantiatedHealthBar !=null)
+            {
+            instantiatedHealthBar.SetEnemy(this.transform, currentHealth, maxHealth);
+            }
+        }
+
+    }
+
+    private void InstantiateStanceBar()
+    {
+        if(StanceBarUI != null)
+        {
+            GameObject stanceBarObj = Instantiate(StanceBarUI);
+            instantiatedStanceBar = stanceBarObj.GetComponent<EnemyStance>();
+
+            if(instantiatedStanceBar !=null)
+            {
+            instantiatedStanceBar.SetEnemy(this.transform, Stance, MaxStance);
+            }
+        }
+
+    }
+
+    void OnDestroy()
+    {
+        if (instantiatedHealthBar != null)
+        {
+            Destroy(instantiatedHealthBar.gameObject);
+        }
+        if (instantiatedStanceBar != null)
+        {
+            Destroy(instantiatedStanceBar.gameObject);
+        }
     }
 }
