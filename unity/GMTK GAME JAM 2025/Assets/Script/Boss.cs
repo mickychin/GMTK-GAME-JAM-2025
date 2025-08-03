@@ -19,6 +19,9 @@ public class Boss : MonoBehaviour, IDamagable
     [SerializeField] private float bulletForce = 20f;
     private bool isAttacking;
     private float Gravity_Scale;
+    [SerializeField] private float ImpaleDropRate;
+    private float Ground_Y;
+    private bool isFallingImpale;
 
     private PlayerControl playerControl;
     [SerializeField] private float attackRange;
@@ -65,6 +68,11 @@ public class Boss : MonoBehaviour, IDamagable
         {
             //walk
             Walk();
+        }
+
+        if(isFallingImpale)
+        {
+            transform.position = new Vector2(transform.position.x, Mathf.Max(transform.position.y, Ground_Y));
         }
     }
 
@@ -229,7 +237,7 @@ public class Boss : MonoBehaviour, IDamagable
 
     private int getAttackPattern()
     {
-        int[] patterns = {75}; //the attack pattern is actually read from back to front
+        int[] patterns = {65}; //the attack pattern is actually read from back to front
         int i = Random.Range(0, patterns.Length);
         return patterns[i];
     }
@@ -241,9 +249,21 @@ public class Boss : MonoBehaviour, IDamagable
 
     private void Jump()
     {
+        Ground_Y = transform.position.y;
         transform.position = new Vector2(transform.position.x, transform.position.y + JumpHeight);
         Gravity_Scale = rb.gravityScale;
         rb.gravityScale = 0;
+    }
+
+    private void Fall_Impale()
+    {
+        isFallingImpale = true;
+        rb.gravityScale = ImpaleDropRate;
+    }
+
+    private void Stopped_Fall_Impale()
+    {
+        isFallingImpale = false;
     }
 
     private void StopFlying()

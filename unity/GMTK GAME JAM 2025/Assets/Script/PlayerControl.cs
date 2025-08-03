@@ -314,6 +314,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Die()
     {
+        rb.velocity = Vector2.zero;
         animator.SetTrigger("Die");
         FindObjectOfType<GameMaster>().Die();
         isStanceBreak = true; //so u cannot move
