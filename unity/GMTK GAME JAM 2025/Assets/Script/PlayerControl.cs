@@ -59,6 +59,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private LayerMask AttacksLayer;
     private bool isStanceBreak;
     [SerializeField] private GameObject ParryEffect;
+    [SerializeField] private Transform Parry_Pos;
 
     private GameManager gameManager;
 
@@ -262,7 +263,7 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log("PARRY");
                 CanParry = 1f;
                 Stance = Stance + 15f;
-                GameObject ParryVFX = Instantiate(ParryEffect, transform.position, Quaternion.identity);
+                GameObject ParryVFX = Instantiate(ParryEffect, Parry_Pos.transform.position, Quaternion.identity);
                 if (!collision.CompareTag("Bullet"))
                 {
                     collision.gameObject.GetComponentInParent<IDamagable>().GotBlocked(BlockKB);

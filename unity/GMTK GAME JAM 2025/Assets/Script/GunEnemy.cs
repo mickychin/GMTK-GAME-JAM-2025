@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SwordmenEnemy : MonoBehaviour, IDamagable
+public class GunEnemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private float maxHealth = 3f;
     public float currentHealth;
@@ -18,6 +18,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
     [SerializeField] float JumpHeight;
     [SerializeField] float jumpAttackDashDistance;
     [SerializeField] float attackDamage;
+    [SerializeField] GameObject bulletPrefabs;
+    [SerializeField] float bulletForce;
+    [SerializeField] Transform firePoint;
     private bool isAttacking;
 
     [Header("Player Detection")]
@@ -71,7 +74,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         Patrol();
 
         Stance = Mathf.Min(Stance + StancePerSecond * Time.deltaTime, MaxStance);
-         if (instantiatedStanceBar != null)
+        if (instantiatedStanceBar != null)
         {
             instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
         }
@@ -96,7 +99,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
                 instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
             }
 
-            if(Stance <= 0)
+            if (Stance <= 0)
             {
                 //staggered
                 animator.SetTrigger("Stance_Break");
@@ -113,7 +116,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
             instantiatedHealthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             //die
             Die();
@@ -141,7 +144,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private bool isBLock() //theres a chance of blocking after getting hit and not
     {
-        if(Random.Range(1, 101) > 10) //90 percent to block
+        if (Random.Range(1, 101) > 10) //90 percent to block
         {
             return true;
         }
@@ -153,7 +156,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void Attack(int AttackMoveSet) //move set start at 1
     {
-        if(playerControl.transform.position.x > transform.position.x)
+        if (playerControl.transform.position.x > transform.position.x)
         {
             transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
@@ -167,7 +170,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
         animator.SetInteger("Attack", AttackMoveSet);
     }
 
-    private  void Die()
+    private void Die()
     {
         if (instantiatedHealthBar != null)
         {
@@ -186,9 +189,9 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void AttackPattern()
     {
-        if(canSeePlayer == true)
+        if (canSeePlayer == true)
         {
-            if(currentCombo == 0)
+            if (currentCombo == 0)
             {
                 currentCombo = getAttackPattern();
             }
@@ -201,7 +204,7 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
             isAttacking = false;
         }
     }
-    
+
     private void SeePlayerCheck()
     {
         Vector2 dir = playerControl.transform.position - transform.position;
@@ -253,14 +256,14 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void InstantiateHealthBar()
     {
-        if(HealthBarUI != null)
+        if (HealthBarUI != null)
         {
             GameObject healthBarObj = Instantiate(HealthBarUI);
             instantiatedHealthBar = healthBarObj.GetComponent<EnemyHP>();
 
-            if(instantiatedHealthBar !=null)
+            if (instantiatedHealthBar != null)
             {
-            instantiatedHealthBar.SetEnemy(this.transform, currentHealth, maxHealth);
+                instantiatedHealthBar.SetEnemy(this.transform, currentHealth, maxHealth);
             }
         }
 
@@ -268,14 +271,14 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private void InstantiateStanceBar()
     {
-        if(StanceBarUI != null)
+        if (StanceBarUI != null)
         {
             GameObject stanceBarObj = Instantiate(StanceBarUI);
             instantiatedStanceBar = stanceBarObj.GetComponent<EnemyStance>();
 
-            if(instantiatedStanceBar !=null)
+            if (instantiatedStanceBar != null)
             {
-            instantiatedStanceBar.SetEnemy(this.transform, Stance, MaxStance);
+                instantiatedStanceBar.SetEnemy(this.transform, Stance, MaxStance);
             }
         }
 
@@ -295,14 +298,31 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private int getAttackPattern()
     {
-        int[] patterns = { 331, 333, 313, 133, 333, 333 }; //the attack pattern is actually read from back to front
+        int[] patterns = { 1 }; //the attack pattern is actually read from back to front
         int i = Random.Range(0, patterns.Length);
         return patterns[i];
     }
 
-    private void Dash()
+    private void ShootHorizontal()
     {
-        rb.velocity = new Vector2(DashDistance * transform.localScale.x, rb.velocity.y);
+        Vector2 playerPos = playerControl.transform.position - transform.position;
+        Vector2 ShootDirect;
+        float bulletAngle;
+        if (playerPos.x > 0)
+        {
+            ShootDirect = Vector2.right;
+            bulletAngle = 0f;
+        }
+        else
+        {
+            ShootDirect = Vector2.left;
+            bulletAngle = 180f;
+        }
+        GameObject bullet = Instantiate(bulletPrefabs);
+        bullet.transform.position = firePoint.transform.position;
+        Rigidbody2D bullet_rb = bullet.GetComponent<Rigidbody2D>();
+        bullet_rb.rotation = bulletAngle - 90f;
+        bullet_rb.AddForce(ShootDirect * bulletForce, ForceMode2D.Impulse);
     }
 
     private void StoppedBlocking()
