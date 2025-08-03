@@ -115,12 +115,18 @@ public class Boss : MonoBehaviour, IDamagable
     {
         if (isStance_Break)
         {
-            currentHealth -= 150;
+            float Staggered_Damage = 100f;
+            currentHealth -= Staggered_Damage;
             isStance_Break = false;
             Stance = MaxStance;
+            animator.Play("walk");
             if (instantiatedStanceBar != null)
             {
                 instantiatedStanceBar.UpdateStanceBar(Stance, MaxStance);
+            }
+            if (instantiatedHealthBar != null)
+            {
+                instantiatedHealthBar.UpdateHealthBar(currentHealth, maxHealth);
             }
         }
 
@@ -143,6 +149,12 @@ public class Boss : MonoBehaviour, IDamagable
                 //staggered
                 animator.SetTrigger("Stance_Break");
                 isStance_Break = true;
+            }
+
+            if (currentHealth <= 0)
+            {
+                //die
+                Die();
             }
             return;
         }
@@ -238,12 +250,12 @@ public class Boss : MonoBehaviour, IDamagable
         if (playerPos.x > 0)
         {
         ShootDirect = Vector2.right;
-        bulletAngle = 0f;
+        bulletAngle = 90f;
         }
         else
         {
         ShootDirect = Vector2.left;
-        bulletAngle = 180f;
+        bulletAngle = -90f;
         }
         GameObject bullet = Instantiate(bulletPrefabs);
         bullet.transform.position = firePoint.transform.position;
