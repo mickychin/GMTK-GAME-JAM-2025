@@ -169,6 +169,8 @@ public class SwordmenEnemy : MonoBehaviour, IDamagable
 
     private  void Die()
     {
+        FindObjectOfType<Gateway>().Enemy_Die();
+
         if (instantiatedHealthBar != null)
         {
             Destroy(instantiatedHealthBar.gameObject);
